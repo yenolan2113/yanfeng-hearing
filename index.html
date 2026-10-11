@@ -1,0 +1,1036 @@
+<!doctype html><html lang="zh-Hant-TW"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>鹽風里公聽會（學生版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a county public-notice board over a cadastral map of a fictional coastal village; each lesson is a numbered land parcel. */
+:root{
+  --paper:#EDF1EC; --sheet:#F8FAF6; --ink:#15212B; --muted:#56636B; --line:#C5CEC4;
+  --solar:#2440B0; --solar-soft:#DCE2F7; --pond:#2F7E78; --pond-soft:#D3E8E4;
+  --good:#2C7A4B; --warn:#A86A12; --bad:#B03535; --good-soft:#DCEFE2; --warn-soft:#F6E8CF; --bad-soft:#F5DADA;
+  --stamp:#B03535;
+  --f-display:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:6px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F161B; --sheet:#162026; --ink:#E2E8E3; --muted:#9AA8AE; --line:#2B3840;
+  --solar:#9DB0FF; --solar-soft:#1E2A52; --pond:#6FC2B9; --pond-soft:#14342F;
+  --good:#7BCB98; --warn:#E3B25E; --bad:#F08A8A; --good-soft:#163323; --warn-soft:#3A2D12; --bad-soft:#3D1C1C;
+  --stamp:#F08A8A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F161B; --sheet:#162026; --ink:#E2E8E3; --muted:#9AA8AE; --line:#2B3840;
+  --solar:#9DB0FF; --solar-soft:#1E2A52; --pond:#6FC2B9; --pond-soft:#14342F;
+  --good:#7BCB98; --warn:#E3B25E; --bad:#F08A8A; --good-soft:#163323; --warn-soft:#3A2D12; --bad-soft:#3D1C1C;
+  --stamp:#F08A8A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(28px,6vw,44px);font-weight:900}
+h2{font-size:clamp(22px,4.4vw,30px);font-weight:900}
+h3{font-size:19px;font-weight:600}
+p{margin:0}
+.mono{font-family:var(--f-mono);letter-spacing:.04em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.muted{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.grid2>*{min-width:0}
+button,.btn{font:inherit;cursor:pointer;border-radius:var(--r);border:1px solid var(--line);background:var(--sheet);color:var(--ink);padding:8px 14px;line-height:1.4}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--solar);outline-offset:2px}
+button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+button.primary:hover{opacity:.9}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.ghost{background:transparent;border-color:transparent;color:var(--muted);padding-inline:6px}
+button.chip{border-radius:999px;padding:5px 12px;font-size:15px}
+button.chip[aria-pressed="true"]{background:var(--solar);border-color:var(--solar);color:var(--sheet)}
+button.chip.neg[aria-pressed="true"]{background:var(--bad);border-color:var(--bad)}
+textarea,input[type=text],select{font:inherit;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--sheet);color:var(--ink)}
+textarea{min-height:92px;resize:vertical}
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:500}
+label.f small{font-weight:400;color:var(--muted)}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:22px}
+.top .brand{display:flex;flex-direction:column;gap:2px;cursor:pointer;background:none;border:0;padding:0;text-align:left}
+.top .brand b{font-family:var(--f-display);font-size:22px;font-weight:900}
+.status{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--sheet);font-size:13px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.dot.on{background:var(--good)} .dot.off{background:var(--warn)}
+
+/* notice hero */
+.notice{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:22px;position:relative;overflow:hidden}
+.stamp{position:absolute;right:18px;top:18px;border:3px double var(--stamp);color:var(--stamp);font-family:var(--f-display);font-weight:900;padding:6px 10px;transform:rotate(-8deg);font-size:15px;line-height:1.2;text-align:center;opacity:.85}
+.notice .lead{max-width:60ch;margin-top:10px}
+.map{width:100%;height:auto;display:block;margin-top:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.map .parcel{cursor:pointer}
+.map .parcel:hover rect.badge,.map .parcel:focus rect.badge{fill:var(--solar)}
+.map .parcel:focus{outline:none}
+.map text{font-family:var(--f-body)}
+.map{background:#CBD3A3}
+.map .parcel:hover rect.badge,.map .parcel:focus rect.badge{fill:var(--solar)}
+.map .parcel:hover .tail,.map .parcel:focus .tail{fill:var(--solar)}
+.map .rotor{animation:mspin 7s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.map .rotor{animation:none}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .map,:root:not([data-theme="light"]) .post svg{filter:brightness(.86) saturate(.92)}}
+:root[data-theme="dark"] .map,:root[data-theme="dark"] .post svg{filter:brightness(.86) saturate(.92)}
+
+.chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:16px}
+.chap{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px 14px;background:var(--sheet)}
+.chap .lot{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.chap b{font-family:var(--f-display);font-size:17px}
+.chap .state{font-size:13px;color:var(--muted)}
+.chap.done .state{color:var(--good);font-weight:700}
+
+/* chapter view */
+.chhead{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 18px}
+.steps button{font-size:13px;padding:4px 10px;border-radius:999px}
+.steps button[aria-current="step"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.steps button.ok::before{content:"✓ ";color:var(--good)}
+.steps button[aria-current="step"].ok::before{color:var(--paper)}
+.panel{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.panel>.stack{max-width:72ch}
+.panel.wide>.stack{max-width:none}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+.q{font-weight:700}
+.note{border-left:3px solid var(--solar);padding:8px 12px;background:var(--solar-soft);border-radius:0 var(--r) var(--r) 0;font-size:15px}
+.note.pond{border-color:var(--pond);background:var(--pond-soft)}
+.law{font-family:var(--f-display);border:1px solid var(--line);padding:12px 14px;border-radius:var(--r);background:var(--paper)}
+.law .mono{font-size:12px;color:var(--muted);display:block}
+
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale button{font-size:14px;padding:8px 4px}
+.scale button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.compare{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;font-size:14px}
+.bar{height:12px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--solar)}
+.bar.b i{background:var(--pond)}
+
+.case{border:1px solid var(--line);border-radius:var(--r);padding:14px;background:var(--paper);display:flex;flex-direction:column;gap:8px}
+.case h3{font-size:17px}
+.case ul{margin:0;padding-left:1.2em}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;padding:2px 7px;border-radius:3px;background:var(--pond-soft);color:var(--pond);align-self:flex-start}
+.tag.s{background:var(--solar-soft);color:var(--solar)}
+
+.matrix{width:100%;border-collapse:collapse;font-size:15px}
+.tablewrap{overflow-x:auto}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.matrix th{font-size:13px;color:var(--muted);font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;flex-wrap:nowrap}
+.seg button{border:0;border-radius:0;padding:6px 10px;font-size:14px;white-space:nowrap;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"][data-v="合理"]{background:var(--good);color:var(--sheet)}
+.seg button[aria-pressed="true"][data-v="有爭議"]{background:var(--warn);color:var(--sheet)}
+.seg button[aria-pressed="true"][data-v="不合理"]{background:var(--bad);color:var(--sheet)}
+.seg.lbl button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.fb{font-size:14px;padding:8px 10px;border-radius:var(--r);margin-top:6px}
+.fb.good{background:var(--good-soft);color:var(--ink)} .fb.warn{background:var(--warn-soft);color:var(--ink)} .fb.bad{background:var(--bad-soft);color:var(--ink)}
+.fb b{font-weight:700}
+
+/* feed */
+.feed{display:flex;flex-direction:column;gap:12px}
+.post{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);padding:14px;display:flex;flex-direction:column;gap:8px}
+.post .who{display:flex;gap:10px;align-items:center;font-size:14px}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--sheet);background:var(--muted);flex:none;font-size:14px}
+.post .meta{color:var(--muted);font-size:12px}
+.post .body{font-size:16px}
+.post .body strong{font-weight:900}
+.post .react{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.sim{font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px dashed var(--line);padding:1px 6px;border-radius:3px;margin-left:auto}
+.post svg{max-width:100%;height:auto;border-radius:4px;display:block}
+
+.report{font-size:14px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.report .h{background:var(--ink);color:var(--paper);padding:8px 12px;font-weight:700;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.report table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.report td,.report th{padding:6px 12px;border-bottom:1px solid var(--line);text-align:left}
+
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);cursor:pointer}
+.check input{margin-top:5px;accent-color:var(--solar)}
+
+/* hearing */
+.hall{display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding:4px}
+.say{max-width:86%;display:flex;flex-direction:column;gap:4px}
+.say .who{font-size:12px;font-family:var(--f-mono);color:var(--muted)}
+.say .bub{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px}
+.say.me{align-self:flex-end}
+.say.me .bub{background:var(--solar-soft);border-color:var(--solar)}
+.say.mod .bub{background:transparent;border-style:dashed}
+.scores{display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
+.scores span{border:1px solid var(--line);border-radius:3px;padding:1px 6px;background:var(--sheet)}
+.scores span b{font-family:var(--f-mono)}
+.coach{font-size:13px;color:var(--muted)}
+.coach em{font-style:normal;color:var(--ink)}
+.thinking{font-size:14px;color:var(--muted);font-style:italic}
+
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.role{text-align:left;display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--paper)}
+.role[aria-pressed="true"]{border-color:var(--solar);box-shadow:inset 0 0 0 2px var(--solar);background:var(--sheet)}
+.role b{font-family:var(--f-display)}
+.role small{color:var(--muted);font-size:13px;line-height:1.5}
+
+.lane{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lane .v{padding:10px 12px;border-radius:var(--r);font-size:15px;border:1px solid var(--line);background:var(--paper);opacity:.25;transition:opacity .4s}
+.lane .v.heard{opacity:1}
+.lane .v.L{border-left:4px solid var(--good)} .lane .v.R{border-left:4px solid var(--bad);grid-column:2}
+.walker{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+
+.sort{display:flex;flex-direction:column;gap:8px}
+.sort .it{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.sort .it>span{min-width:0;flex:1 1 200px}
+
+.breath{width:140px;height:140px;border-radius:50%;border:2px solid var(--pond);display:grid;place-items:center;margin:8px auto;font-family:var(--f-display);font-size:20px;color:var(--pond);transition:transform 4s ease-in-out;background:var(--pond-soft)}
+.breath.in{transform:scale(1.25)}
+@media (prefers-reduced-motion:reduce){.breath{transition:none}.lane .v{transition:none}}
+
+.cert{border:2px solid var(--ink);border-radius:var(--r);padding:20px;background:var(--sheet);display:flex;flex-direction:column;gap:14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kv div{border:1px solid var(--line);border-radius:var(--r);padding:10px;background:var(--paper)}
+.kv small{display:block;color:var(--muted);font-size:12px}
+.kv b{font-family:var(--f-mono);font-size:20px;font-variant-numeric:tabular-nums}
+pre.record{white-space:pre-wrap;font-family:var(--f-mono);font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin:0;max-height:300px;overflow:auto}
+.sel{display:flex;flex-direction:column;gap:10px}
+.sel .item{display:flex;flex-direction:column;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sel .lk{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.sel .lk button{padding:6px 0;font-size:13px}
+.sel .lk button[aria-pressed="true"]{background:var(--pond);color:var(--sheet);border-color:var(--pond)}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:999px;font-size:14px;z-index:9}
+@media (max-width:560px){.lane{grid-template-columns:1fr}.lane .v.R{grid-column:1}.say{max-width:100%}.stamp{position:static;display:inline-block;margin-bottom:10px}}
+</style>
+
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ============ DATA ============ */
+const EMO_POS=["期待","安心","驕傲","希望","好奇","感激","平靜","被尊重","有力量","樂觀","放心","興奮","認同","踏實","溫暖"];
+const EMO_NEG=["擔心","焦慮","生氣","無力","委屈","矛盾","害怕","不安","失望","挫折","煩躁","被忽視","懷疑","難過","內疚"];
+const SCALE=["非常反對","有點反對","不確定","有點支持","非常支持"];
+const SEL=[
+ ["情緒辨識","我能說出自己面對爭議時的感受。"],
+ ["情緒辨識","我能分辨自己的情緒和立場。"],
+ ["觀點取替","我能說出和我意見不同的人在乎什麼。"],
+ ["觀點取替","我願意聽完不同意見再回應。"],
+ ["自我調節","看到激動的貼文時，我會先停下來再回應。"],
+ ["自我調節","我知道遭遇網路攻擊時如何保護自己。"],
+ ["責任決策","我能提出兼顧不同立場的做法。"],
+ ["責任決策","面對氣候變遷等無法立即改變的事，我知道自己還能做什麼。"]
+];
+const ROLES=[
+ {id:"fisher",name:"承租魚塭的漁民",who:"漁民 阿興",care:"能繼續養魚、維持一家生計",fear:"租約被終止，失去做了二十年的工作",
+  open:"我租這片魚塭養了二十年虱目魚。地主要把地租給光電業者，租約一到期，我就沒地方養了。我不反對綠能，但從頭到尾有誰來問過我們這些承租的人？",
+  reply:"你說得好像大家都有選擇。可是承租的人連通知都沒收到。如果光電一定要做，能不能先保障我們可以繼續養魚，或是有轉業的安排？"},
+ {id:"landlord",name:"出租土地的地主",who:"地主 林伯",care:"土地收益與晚年生活保障",fear:"被鄰居說成貪財，和老朋友撕破臉",
+  open:"這塊地是我的，租給光電一年的租金比養魚穩定多了。我年紀大了，孩子都在外地。我用自己的土地，難道還要每個人都同意？",
+  reply:"我聽得懂大家的擔心，可是我也要過日子。如果要我配合改設計，少掉的收入誰來補？大家能不能也想想我的處境？"},
+ {id:"neighbor",name:"擔心噪音的鄰居",who:"鄰居 美玲",care:"家人的睡眠與健康",fear:"晚上睡不好，房子以後也賣不掉",
+  open:"最近的風機離我家只有兩百五十公尺。業者說噪音符合標準，可是監測都在白天做。我小孩本來就淺眠，我很擔心晚上那種嗡嗡聲。",
+  reply:"我不是反綠能。我只想知道：晚上會不會也測？如果真的吵到睡不著，我可以找誰、多久會處理？"},
+ {id:"youth",name:"左右為難的返鄉青年",who:"返鄉青年 小凱",care:"家鄉有工作機會，也保有原本的樣子",fear:"家鄉吵成兩派，自己兩邊都不是人",
+  open:"我回來是想讓家鄉有新的機會，業者說會找在地人做維運。可是我爸是養魚的，我阿嬤每天去看黑面琵鷺。我真的不知道該站哪一邊。",
+  reply:"聽完大家的話，我更矛盾了。有沒有一種做法，是能讓年輕人留下來，又不用讓長輩覺得家鄉被拿走？"},
+ {id:"company",name:"綠能業者",who:"業者 陳經理",care:"計畫如期完工、達成發電目標",fear:"被貼上破壞家園的標籤，投資卡關",
+  open:"我們依法做了環評，也願意提供回饋金。國家的減碳目標很急，如果每個地方都說不要在我家，那電要從哪裡來？",
+  reply:"我聽到大家的擔心。如果把最近的兩座風機往外移，成本會增加、時程會延後。我們願意談，但希望大家也提出具體可行的條件。"},
+ {id:"ngo",name:"生態保育團體",who:"保育團體 許研究員",care:"黑面琵鷺與濕地棲地",fear:"棲地被切碎，候鳥不再回來",
+  open:"去年冬天的調查，預定地周邊記錄到黑面琵鷺覓食。我們支持能源轉型，但希望先劃設生態敏感區，避開核心棲地。",
+  reply:"減碳和保育不一定是對立的。我想問：如果先做一整年的生態調查再決定範圍，各位願意等嗎？"},
+ {id:"gov",name:"地方政府",who:"縣府 張科長",care:"達成縣內再生能源目標，也維持地方和諧",fear:"決策被批評黑箱，陷入長期抗爭",
+  open:"縣府有再生能源的目標，也要顧到鄉親的感受。今天就是來聽大家的意見，任何具體建議都會記錄下來，並在會後回覆。",
+  reply:"謝謝大家。我想請教：如果縣府辦正式的聽證，把每一項意見都逐條回應，大家覺得還缺哪些資訊要先公開？"}
+];
+const OPPOSITE={fisher:"landlord",landlord:"fisher",neighbor:"company",company:"neighbor",ngo:"company",youth:"gov",gov:"neighbor"};
+
+const CASES=[
+ {id:"solar",tag:"光電組",title:"台南七股 漁電共生",facts:[
+   "「漁電共生」是在魚塭上方或旁邊設置光電板，希望養殖和發電可以並存。",
+   "地主出租土地給業者，可以拿到比養殖更穩定的租金。",
+   "實際在魚塭工作的常是承租的漁民，租約變動會直接影響他們的生計。",
+   "七股一帶是黑面琵鷺度冬的重要區域，保育團體擔心光電板改變覓食環境。",
+   "返鄉青年看見新的工作機會，也看見家人和鄰里因此意見分裂。"],
+  q:[["保育團體","候鳥棲地","solar2"],["返鄉青年","家鄉發展與鄰里關係","solar3"],["承租漁民","能否繼續養殖、生計保障","solar0"],["地主","土地收益","solar1"]],
+  opts:["計畫完成與投資","減碳與能源轉型","家鄉發展與鄰里關係","睡眠、噪音與安全","土地收益","能源目標與程序","候鳥棲地","能否繼續養殖、生計保障"]},
+ {id:"wind",tag:"風電組",title:"苗栗苑裡 反瘋車",facts:[
+   "業者在苑裡沿海設置陸域風機，部分風機距離住家很近。",
+   "居民擔心低頻噪音與安全，喊出「不反綠能，只反不當選址」。",
+   "居民曾到能源主管機關陳情，要求舉行聽證會、公開資訊。",
+   "爭議延續多年，後來朝「拆二留二」的方向協商，部分風機移除。"],
+  q:[["支持綠能的民眾","減碳與能源轉型","wind3"],["主管機關","能源目標與程序","wind2"],["鄰近居民","睡眠、噪音與安全","wind0"],["業者","計畫完成與投資","wind1"]],
+  opts:["土地收益","睡眠、噪音與安全","候鳥棲地","計畫完成與投資","家鄉發展與鄰里關係","減碳與能源轉型","能否繼續養殖、生計保障","能源目標與程序"]}
+];
+const CONCERNS=["能否繼續養殖、生計保障","土地收益","候鳥棲地","家鄉發展與鄰里關係","睡眠、噪音與安全","計畫完成與投資","能源目標與程序","減碳與能源轉型"];
+const SCENES=[
+ {id:"night",t:"夜裡，窗外轉動的風機",p:"鄰居、小孩或風機維修員"},
+ {id:"bird",t:"魚塭旁低頭覓食的黑面琵鷺",p:"黑面琵鷺、賞鳥的阿嬤或保育研究員"},
+ {id:"lease",t:"地主收到光電業者的租約",p:"地主、承租漁民或地主的孩子"},
+ {id:"youth",t:"返鄉青年站在魚塭邊講電話",p:"返鄉青年、他的父親或業者"}
+];
+
+const BALANCE=[
+ {id:"b1",grp:"比例原則",item:"目的正當",fact:"縣府核准的理由是達成縣內再生能源目標、降低燃煤發電的碳排放。",ok:["合理"],why:"減碳與穩定供電屬於公共利益，目的本身通常被認為正當。"},
+ {id:"b2",grp:"比例原則",item:"手段適當",fact:"風機與光電板確實能發電並取代部分燃煤電力。",ok:["合理"],why:"設置綠能設施能幫助達成減碳目的，手段與目的之間有關聯。"},
+ {id:"b3",grp:"比例原則",item:"最小侵害",fact:"最近一座風機距民宅約 250 公尺；業者沒有評估把它移到較遠處的替代方案。",ok:["不合理","有爭議"],why:"若有同樣能達成目的、但對居民影響較小的做法（例如移位），卻沒有評估，就很難說是最小侵害。"},
+ {id:"b4",grp:"比例原則",item:"利益衡平",fact:"整體可減碳；但居民擔心夜間低頻噪音，黑面琵鷺的覓食區也會縮小。業者提出每戶回饋金。",ok:["有爭議"],why:"公益與私益、減碳與生態都要放上天平。回饋金能補償部分損失，但補不了睡眠和棲地，所以最有爭議。"},
+ {id:"b5",grp:"正當程序",item:"資訊公開",fact:"環評資料只放在鄉公所，以紙本供閱覽 14 天，限上班時間。",ok:["有爭議","不合理"],why:"資料有公開，但只在上班時間、只有紙本，上班上課的人幾乎看不到，形式公開不等於實質公開。"},
+ {id:"b6",grp:"正當程序",item:"民眾參與",fact:"只在平日下午辦了一場說明會；承租魚塭的漁民沒有收到通知。",ok:["不合理"],why:"受影響最直接的人沒被通知，也沒有雙向討論的機會，民眾參與明顯不足。"},
+ {id:"b7",grp:"正當程序",item:"說明理由",fact:"核准公文附上審查理由，但沒有回應居民提出的夜間噪音問題。",ok:["有爭議"],why:"有說明理由，但沒有回應主要的反對意見，居民會覺得「被聽見，卻沒被回應」。"}
+];
+const TOOLBOX=[
+ {q:"「目的正當、手段適當、最小侵害、利益衡平」是在檢查什麼？",o:["比例原則","正當程序","外部成本"],a:0},
+ {q:"「資訊公開、民眾參與、說明理由」是在檢查什麼？",o:["比例原則","正當程序","所有權的特性"],a:1},
+ {q:"風機的噪音由附近居民承擔，但用電的人在遠方，這種情況叫做？",o:["外部成本","利益衡平","資訊不對稱"],a:0}
+];
+
+const POSTS=[
+ {id:"p1",user:"在地真相大公開",av:"真",time:"3 小時前",body:"<strong>風機電磁波會致癌！！</strong>住風機附近的人一個一個生病，政府還在隱瞞！！快分享給家人",react:"♥ 2.1萬 · 分享 8,432",
+  ans:"誇大謠言",why:"沒有來源、沒有數據，用驚嘆號和「快分享」製造恐慌。一般認為風機周邊的電磁場量值很低，若真的擔心，應查證公開的監測報告。"},
+ {id:"p2",user:"愛台灣好山好水",av:"山",time:"昨天",body:"整座山都被光電板蓋滿了，這就是綠能的真面目 😡",img:true,react:"♥ 1.4萬 · 分享 5,120",
+  ans:"AI 生成內容",why:"看圖片細節：光電板一路鋪到樹冠上、招牌文字是亂碼、兩組陰影方向相反。這是 AI 生成圖片的常見破綻。"},
+ {id:"p3",user:"美玲（鹽風里居民）",av:"美",time:"5 小時前",body:"晚上關窗還是聽得到嗡嗡聲。業者的噪音監測都是白天做的，可以請他們晚上也測一次嗎？",react:"♥ 213 · 留言 46",
+  ans:"合理擔憂",why:"說出具體經驗，也提出可查證、可改善的要求（夜間監測）。這是合理擔憂，不該被貼上「反綠能」標籤。"},
+ {id:"p4",user:"即時新聞快報",av:"快",time:"1 天前",body:"<strong>環團：光電害死黑面琵鷺</strong><br><span class=\"muted\">（內文）保育團體表示，棲地減少「可能影響覓食」，建議持續監測。</span>",react:"♥ 6,780 · 分享 2,310",
+  ans:"斷章取義",why:"標題說「害死」，內文只說「可能影響、建議監測」。標題誇大了原意，是煽動性的斷章取義。"},
+ {id:"p5",user:"濕地守望聯盟",av:"濕",time:"2 天前",body:"去年 11 月至今年 2 月的調查，預定地周邊共記錄到黑面琵鷺覓食 23 次。建議先劃設生態敏感區，避開核心棲地。（附調查報告連結）",react:"♥ 892 · 分享 301",
+  ans:"合理擔憂",why:"有調查期間、次數和報告來源，也提出具體建議。這是有證據支持的合理擔憂。"},
+ {id:"p6",user:"減碳不等人",av:"碳",time:"40 分鐘前",body:"反對風機的都是拿錢的、都是反綠能的自私鬼，台灣就是被這些人拖垮！",react:"♥ 3,050 · 留言 1,204",
+  ans:"標籤攻擊",why:"沒有討論內容，而是給反對者貼標籤、攻擊人格。這種貼文讓合理的擔憂也被一起污名化。"}
+];
+const LABELS=["合理擔憂","誇大謠言","AI 生成內容","斷章取義","標籤攻擊"];
+const CHECKS=["來源：誰說的？找得到原始資料嗎？","時間：是最近的事，還是舊聞重貼？","圖片細節：陰影、文字、邊緣是否不自然？","情緒字眼：有沒有大量驚嘆號、「快分享」？","誰沒有發聲：哪一方的說法沒出現？"];
+const REPORT_ISSUES=[
+ {t:"只在白天量測，沒有夜間資料",ok:true},
+ {t:"由業者自己委託檢測，最好有第三方或公開原始數據",ok:true},
+ {t:"只量 A 加權音量，沒有分析低頻噪音",ok:true},
+ {t:"測點不包含距風機最近的民宅",ok:true},
+ {t:"報告有寫量測日期與時段",ok:false},
+ {t:"數字只到整數，不夠精確",ok:false}
+];
+const ATTACK={user:"減碳不等人",text:"鹽風里那些反對的人就是自私，自己要用電又不讓人蓋，乾脆把他們家的電斷掉！"};
+const VERIFY=["這則留言是誰發的？是真實帳號嗎？","居民反對的具體理由是什麼？","有沒有居民或保育團體的原始說法？","業者與縣府公開了哪些資料？"];
+const SAFE=["不回嘴","截圖保存","封鎖或檢舉","找信任的大人或老師求助"];
+
+const CONSCIENCE=[
+ {s:"L",t:"夏天一年比一年熱，氣候變遷就在眼前，我們這一代等不起。"},
+ {s:"R",t:"我不是反綠能，我是反對把風機蓋在離我家這麼近的地方。"},
+ {s:"L",t:"風機的維運工作讓我可以留在家鄉，不用再去都市打工。"},
+ {s:"R",t:"黑面琵鷺每年冬天都回來。牠們不會投票，誰替牠們說話？"},
+ {s:"L",t:"縣裡的工廠需要綠電，才接得到國外的訂單。"},
+ {s:"R",t:"從頭到尾，沒有人來問過我們這些承租的漁民。"}
+];
+const DECISIONS=["核准原案","有條件核准：移走最近的兩座風機，並做生態監測","暫緩：重新辦理聽證與選址評估","不核准"];
+
+const CRAB=[
+ ["提案","民眾在公共政策網路參與平臺提出延長「抱卵母蟹」禁漁期。"],
+ ["附議","提案在期限內達到附議門檻，主管機關必須回應。"],
+ ["座談","主管機關召開座談會，聽取漁民、環團與研究機構的不同意見。"],
+ ["折衷","最後折衷延長禁漁期，不是任何一方的全部主張。"],
+ ["監督","新規上路後仍有違規販售：好的程序之後，還需要執行與監督。"]
+];
+const CRAB_Q=["在決策前就讓民眾提案、附議","讓立場不同的群體都在場說明","決策結果可以是折衷方案","上路後持續執行與監督","只要附議人數夠多，主管機關就必須照提案做"];
+const CONTROL=[
+ {t:"轉傳貼文前先查證",a:"can"},
+ {t:"中央訂定的能源轉型目標",a:"cannot"},
+ {t:"去旁聽一場環評會議或說明會",a:"can"},
+ {t:"業者最後要不要投資",a:"cannot"},
+ {t:"在公共政策網路參與平臺提案或附議",a:"can"},
+ {t:"別人在網路上怎麼評論",a:"cannot"},
+ {t:"跟家人說明我理解的爭點",a:"can"},
+ {t:"今年夏天有多熱",a:"cannot"}
+];
+const HEARINGQ=[
+ {q:"哪一種主要是由主辦單位「單向說明」計畫內容？",o:["說明會","公聽會","聽證會"],a:0},
+ {q:"哪一種讓各方公開表達意見，但結果通常沒有法律上的拘束力？",o:["說明會","公聽會","聽證會"],a:1},
+ {q:"哪一種依《行政程序法》進行，當事人可以陳述意見、提出證據、互相詢問，機關作決定時要斟酌全部結果？",o:["說明會","公聽會","聽證會"],a:2},
+ {q:"苑裡居民為什麼堅持要「聽證會」？",o:["因為聽證會比較熱鬧、比較多媒體","因為聽證程序較正式，紀錄會影響決定，意見不只是被聽見","因為聽證會可以直接否決業者的計畫"],a:1}
+];
+const STAKE=["承租漁民","地主","鄰近居民","返鄉青年","綠能業者","保育團體","地方政府","學者專家","高齡或不便出門的居民"];
+const STAGES=["選址規劃前","環評審查時","核准決定前","施工期間","營運後監督"];
+const METHODS=["說明會","公聽會","聽證會","社區工作坊","線上意見平臺","逐戶訪談","生態調查公開"];
+
+const CH=[
+ {id:1,lot:"鹽風段 101",title:"我支持綠能，但……",verb:"覺察",goal:"C-4",steps:["第一次投票","第二次投票","拼圖閱讀","定格畫面","我的情緒與立場"]},
+ {id:2,lot:"鹽風段 102",title:"法律工具箱",verb:"理解",goal:"C-1、C-2",steps:["我的土地我作主？","工具箱","公益衡量判斷表","追問與出口卡"]},
+ {id:3,lot:"鹽風段 103",title:"綠能謠言與網路風暴",verb:"辨識",goal:"C-3、C-6",steps:["情緒快照","辨識操弄","誰提供的數據","停一下再回應","自保策略"]},
+ {id:4,lot:"鹽風段 104",title:"戲劇公聽會",verb:"對話",goal:"C-5、C-7",steps:["角色情緒卡","公聽會","良心巷","出戲"]},
+ {id:5,lot:"鹽風段 105",title:"換位、韌性與行動",verb:"行動",goal:"C-6、C-8",steps:["轉換立場","抱卵母蟹案","能／不能控制","三種會議","設計參與流程","SEL 後測與成果"]}
+];
+
+/* ============ STATE ============ */
+const KEY="yanfeng-hearing-v1";
+const blank=()=>({name:"",seat:"",pre:Array(8).fill(0),post:Array(8).fill(0),view:"home",step:{1:0,2:0,3:0,4:0,5:0},done:{},
+ c1:{v1:-1,v2:-1,e1:[],e2:[],change:"",match:{},scene:"",inner:"",feel:"",stance:""},
+ c2:{s1:"",s2:"",i1:3,i2:3,tb:{},bal:{},balChecked:false,ask:"",exit:"",same:"",diff:""},
+ c3:{snapEmo:[],snapInt:3,lab:{},labChecked:false,rep:[],repChecked:false,emo:[],ver:[],action:"",reply:"",replyFb:null,safe:[],strategy:""},
+ c4:{role:"",care:"",fear:"",draft:"",log:[],scores:[],round:0,walk:0,decision:"",mayorFeel:"",hurt:"",moment:"",split:""},
+ c5:{swapRole:"",swap:"",swapFb:null,crab:[],ctl:{},hq:{},who:[],when:[],how:[],inclusion:"",respond:"",procFb:null}
+});
+let S;
+try{S=Object.assign(blank(),JSON.parse(localStorage.getItem(KEY)||"null")||{})}catch(e){S=blank()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ============ CLAUDE ============ */
+/* 學生版：不連線 Claude，全部使用內建劇本與自動檢核 */
+let sample=null, claudeState="off";
+function claudeFail(e){
+ const c=e&&e.code;
+ if(["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"].includes(c)){claudeState="off";sample=null;return "Claude 目前無法使用，改用內建劇本與自動檢核。"}
+ if(c==="rate_limited")return "Claude 暫時忙碌，請稍等一下再按一次。";
+ if(c==="session_expired")return "登入已過期，請重新登入 Claude 後再試。";
+ return "Claude 這次沒有回應，可以再按一次，或先用內建檢核。";
+}
+const SETTING="情境：虛構的濱海聚落「鹽風里」。業者規劃在魚塭設置漁電共生光電板，並在聚落外圍設置 12 座陸域風機，最近一座距民宅約 250 公尺；預定地周邊冬季有黑面琵鷺覓食。環評資料只在鄉公所紙本供閱覽，說明會只辦一場，承租漁民沒收到通知。縣府召開公聽會。這是高中公民與社會課的教育戲劇遊戲，學生是 16–18 歲的高中生。請一律使用台灣繁體中文，語氣溫和、具體，不提任何真實人物姓名。";
+
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pressed=b=>b?'aria-pressed="true"':'aria-pressed="false"';
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2200)}
+const roleById=id=>ROLES.find(r=>r.id===id);
+const avg=a=>{const v=a.filter(x=>x>0);return v.length?(v.reduce((s,x)=>s+x,0)/v.length):0};
+function markDone(ch){S.done[ch]=true;save()}
+
+/* ============ RENDER ============ */
+function render(){
+ const app=$("#app");
+ const keepScroll=document.activeElement&&document.activeElement.id;
+ app.innerHTML=header()+(S.view==="home"?home():chapter(+S.view));
+ if(keepScroll){const el=document.getElementById(keepScroll);if(el){el.focus();if(el.setSelectionRange&&el.value!=null){try{const n=el.value.length;el.setSelectionRange(n,n)}catch(e){}}}}
+ const hall=$(".hall");if(hall)hall.scrollTop=hall.scrollHeight;
+}
+function header(){
+ const n=Object.keys(S.done).length;
+ const cs=claudeState==="on"?'<span class="dot on"></span>Claude 對手已就位':claudeState==="checking"?'<span class="dot"></span>連線 Claude 中…':'<span class="dot on"></span>學生版 · 免登入';
+ return `<header class="top"><button class="brand" data-act="home"><span class="eyebrow">2026 永續台灣創意教案 · 高中公民</span><b>鹽風里公聽會</b></button>
+ <div class="status"><span class="pill">${cs}</span><span class="pill mono">完成 ${n} / 5</span>${S.name?`<span class="pill">${esc(S.name)}${S.seat?" · "+esc(S.seat)+" 號":""}</span>`:""}</div></header>`;
+}
+function mapSVG(){
+ /* 鳥瞰插畫（北方朝上）：西側台灣海峽與沙灘風機、中間濕地與魚塭、東側聚落。地景先在原座標繪製再整體左右翻轉，文字標籤另外放在翻轉後的位置。 */
+ const M=x=>640-x;
+ let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+ const W=640,H=360;
+ const seaX=y=>500+12*Math.sin(y/52)+6*Math.sin(y/19);
+ const pts=(f,dx)=>{let a=[];for(let y=0;y<=H;y+=10)a.push(`${(f(y)+dx).toFixed(1)} ${y}`);return a};
+ const seaPath=`M${pts(seaX,0).join(" L")} L${W} ${H} L${W} 0Z`;
+ const sandPath=`M${pts(seaX,-34).join(" L")} L${W} ${H} L${W} 0Z`;
+ const waves=[10,24,40].map((d,i)=>`<path d="M${pts(seaX,d).join(" L")}" fill="none" stroke="#fff" stroke-opacity="${.55-i*.15}" stroke-width="${1.4-i*.3}" stroke-dasharray="${i?"14 10":"none"}"/>`).join("");
+ const roadX=y=>seaX(y)-50;
+ const road=`<path d="M${pts(seaX,-50).join(" L")}" fill="none" stroke="#8C8B84" stroke-width="5"/><path d="M${pts(seaX,-50).join(" L")}" fill="none" stroke="#F3EFE2" stroke-width=".8" stroke-dasharray="5 5"/>`;
+ /* 防風林（木麻黃） */
+ let pines="";for(let y=6;y<H;y+=7){const x=seaX(y)-40+rnd()*6;pines+=`<circle cx="${x.toFixed(1)}" cy="${y}" r="${(3+rnd()*1.6).toFixed(1)}" fill="${rnd()>.5?"#3F6B44":"#4C7A4E"}"/>`}
+ /* 農田 */
+ const fields=[[0,236,96,58,"#C8CF93"],[96,236,104,58,"#B7C784"],[0,294,70,66,"#D9D19C"],[70,294,130,66,"#BCCB8A"]].map(([x,y,w,h,c])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" stroke="#A9B57A" stroke-width=".8"/>`).join("")
+  +Array.from({length:14},(_,i)=>`<line x1="${74+i*9}" y1="296" x2="${74+i*9}" y2="358" stroke="#A7B776" stroke-width=".6"/>`).join("");
+ /* 聚落房屋 */
+ const roofs=["#B5533C","#C46A47","#9C5A48","#7D8A8F","#B5533C","#A8644E"];
+ let houses="";
+ for(let r=0;r<6;r++)for(let c=0;c<7;c++){
+  if(rnd()<.22)continue;
+  const x=14+c*25+rnd()*6,y=28+r*30+rnd()*6,w=15+rnd()*5,h=11+rnd()*3,col=roofs[Math.floor(rnd()*roofs.length)];
+  if(x>176&&y>130)continue;
+  houses+=`<g filter="url(#m-sh)"><rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="#EFE8DA"/><rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${(h*.62).toFixed(1)}" fill="${col}"/><line x1="${x.toFixed(1)}" y1="${(y+h*.31).toFixed(1)}" x2="${(x+w).toFixed(1)}" y2="${(y+h*.31).toFixed(1)}" stroke="#000" stroke-opacity=".18" stroke-width=".8"/></g>`;
+ }
+ /* 廟與活動中心 */
+ const temple=`<g filter="url(#m-sh)"><rect x="96" y="104" width="34" height="22" fill="#EFE3CC"/><path d="M88 113 Q92 108 98 107 L128 107 Q134 108 138 113 L132 117 L94 117Z" fill="#D9822B"/><path d="M98 107 L128 107" stroke="#A85A16" stroke-width="1.2"/><path d="M88 113 l-3 -3 M138 113 l3 -3" stroke="#D9822B" stroke-width="1.6" stroke-linecap="round"/><rect x="104" y="126" width="18" height="10" fill="#D8CDB6"/></g>`;
+ const center=`<g filter="url(#m-sh)"><rect x="28" y="196" width="44" height="24" fill="#E8EDF0"/><rect x="28" y="196" width="44" height="12" fill="#5D7584"/></g>`;
+ const centerLbl=`<g transform="translate(${M(50)},246)"><rect x="-22" y="-8" width="44" height="13" rx="6.5" fill="#fff" fill-opacity=".88"/><text y="2" font-size="8.5" fill="#3B4A52" text-anchor="middle">活動中心</text></g>`;
+ let trees="";for(let i=0;i<26;i++){const x=10+rnd()*190,y=20+rnd()*200,s=3+rnd()*4;trees+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${s.toFixed(1)}" fill="#5D8A4C" opacity=".9"/><circle cx="${(x-s*.3).toFixed(1)}" cy="${(y-s*.3).toFixed(1)}" r="${(s*.45).toFixed(1)}" fill="#7EA766" opacity=".8"/>`}
+ /* 濕地 */
+ const wet=`<path d="M214 10 C260 2 330 6 420 14 C440 40 436 80 424 104 C360 112 280 110 214 104Z" fill="#AFC6A3"/>
+  <path d="M236 30 C270 22 300 34 312 50 C300 70 262 74 240 62 C228 52 228 40 236 30Z" fill="url(#m-shallow)"/>
+  <path d="M322 40 C352 28 396 34 408 52 C404 76 372 90 340 84 C318 78 312 56 322 40Z" fill="url(#m-shallow)"/>
+  ${Array.from({length:40},()=>{const x=218+rnd()*200,y=16+rnd()*84;return `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l${(rnd()*2-1).toFixed(1)} -5" stroke="#6E8F5C" stroke-width=".8"/>`}).join("")}`;
+ const bird=(x,y,f)=>`<g transform="translate(${x},${y}) scale(${f},1)"><ellipse cx="0" cy="0" rx="4.2" ry="2.3" fill="#FAFAF7" stroke="#9AA" stroke-width=".3"/><circle cx="3.6" cy="-1.4" r="1.4" fill="#FAFAF7"/><path d="M4.6 -1.4 l4 1.2 q1.2 .4 .6 1.1 q-.6 .4 -1.2 -.3z" fill="#1E1E1E"/><line x1="-.8" y1="2.2" x2="-1" y2="4.4" stroke="#333" stroke-width=".5"/><line x1=".8" y1="2.2" x2="1" y2="4.4" stroke="#333" stroke-width=".5"/></g>`;
+ const birds=[[262,44,1],[276,52,-1],[290,40,1],[346,58,1],[362,66,-1],[380,52,1],[252,56,-1]].map(a=>bird(...a)).join("");
+ const eco=`<path d="M220 16 C270 8 340 10 414 18 C432 44 430 80 418 98 C352 106 282 104 220 98Z" fill="none" stroke="#2C7A4B" stroke-width="1.4" stroke-dasharray="5 3"/>`;
+ const ecoLbl=`<g transform="translate(${M(320)},96)"><rect x="-44" y="-9" width="88" height="15" rx="7.5" fill="#fff" fill-opacity=".88"/><text y="2" font-size="9" fill="#2C7A4B" text-anchor="middle" font-weight="700">黑面琵鷺覓食區</text></g>`;
+ /* 魚塭 */
+ let ponds="",pv="";
+ const PX=218,PY=122,PW=50,PH=44,G=9;
+ const pvSet=new Set(["1,2","2,2","2,1"]);
+ for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+  const x=PX+c*(PW+G),y=PY+r*(PH+G);
+  ponds+=`<rect x="${x}" y="${y}" width="${PW}" height="${PH}" rx="2" fill="url(#m-pond)"/><rect x="${x}" y="${y}" width="${PW}" height="${PH}" rx="2" fill="none" stroke="#8E7F5A" stroke-opacity=".45" stroke-width="1"/>`;
+  if(pvSet.has(r+","+c)){
+   pv+=`<g filter="url(#m-sh)"><rect x="${x+3}" y="${y+4}" width="${PW-6}" height="${PH-14}" fill="url(#m-pv)"/><rect x="${x+3}" y="${y+4}" width="${PW-6}" height="${PH-14}" fill="url(#m-pvgrid)"/></g>`;
+  }else if((r+c)%2===0){
+   const ax=x+PW*(.3+rnd()*.4),ay=y+PH*(.3+rnd()*.4);
+   ponds+=`<circle cx="${ax.toFixed(1)}" cy="${ay.toFixed(1)}" r="5" fill="#fff" fill-opacity=".35"/><circle cx="${ax.toFixed(1)}" cy="${ay.toFixed(1)}" r="2.2" fill="#F2F2EC"/><circle cx="${ax.toFixed(1)}" cy="${ay.toFixed(1)}" r="9" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".8"/>`;
+  }
+ }
+ const dikes=`<rect x="${PX-6}" y="${PY-6}" width="${4*PW+3*G+12}" height="${4*PH+3*G+12}" fill="#BCA977"/>`;
+ const plan=`<rect x="${PX+PW+G-4}" y="${PY+PH+G-4}" width="${3*PW+2*G+8}" height="${3*PH+2*G+8}" fill="none" stroke="#E07B1A" stroke-width="1.6" stroke-dasharray="6 3" rx="3"/>`;
+ const planLbl=`<g transform="translate(${M(PX+2.5*(PW+G))},${PY+4*(PH+G)+8})"><rect x="-52" y="-9" width="104" height="15" rx="7.5" fill="#fff" fill-opacity=".9"/><text y="2" font-size="9" fill="#B35F10" text-anchor="middle" font-weight="700">漁電共生預定地</text></g>`;
+ /* 風機（陸域，立於沙灘） */
+ const tys=[50,102,154,206,258,310];
+ const turb=tys.map((y,i)=>{const x=seaX(y)-16;const a=(i*37)%120;
+  return `<g><line x1="${x}" y1="${y}" x2="${x+26}" y2="${y+14}" stroke="#000" stroke-opacity=".16" stroke-width="2.6" stroke-linecap="round"/>
+  <ellipse cx="${x}" cy="${y}" rx="3.4" ry="1.6" fill="#9B9A90"/><line x1="${x}" y1="${y}" x2="${x}" y2="${y-30}" stroke="#7E8A8F" stroke-width="3.2" stroke-linecap="round"/><line x1="${x}" y1="${y}" x2="${x}" y2="${y-30}" stroke="#F7F8F6" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="${x-2.4}" y="${y-33}" width="6" height="3.4" rx="1" fill="#E9ECEA" stroke="#8C979B" stroke-width=".4"/>
+  <g transform="translate(${x},${y-31.5})"><g style="transform:rotate(${a}deg)"><g class="rotor">${[0,120,240].map(d=>`<path d="M0 0 L-1.3 -2 L-.4 -19 L.6 -19 L1.3 -2Z" fill="#FBFBF8" stroke="#8C979B" stroke-width=".35" transform="rotate(${d})"/>`).join("")}<circle r="1.6" fill="#DADFDC" stroke="#8C979B" stroke-width=".4"/></g></g></g></g>`}).join("");
+ /* 距離線 */
+ const hx=186,hy=154,tx=seaX(154)-16,ty=154;
+ const dist=`<g filter="url(#m-sh)"><rect x="176" y="146" width="17" height="12" fill="#EFE8DA"/><rect x="176" y="146" width="17" height="7.5" fill="#B5533C"/></g><line x1="${hx}" y1="${hy}" x2="${tx}" y2="${ty}" stroke="#B03535" stroke-width="1.3" stroke-dasharray="5 3"/><circle cx="${hx}" cy="${hy}" r="2.4" fill="#B03535"/><circle cx="${tx}" cy="${ty}" r="2.4" fill="#B03535"/>`;
+ const distLbl=`<g transform="translate(${M((hx+tx)/2+30)},${hy-9})"><rect x="-62" y="-9" width="124" height="16" rx="8" fill="#fff" stroke="#B03535" stroke-width=".8"/><text y="2.5" font-size="9.5" fill="#B03535" text-anchor="middle" font-weight="700">最近風機距民宅約 250 m</text></g>`;
+ /* 比例尺、指北 */
+ const deco=`<g transform="translate(498,346)" font-size="8" fill="#3B4A52"><rect x="0" y="-5" width="57" height="4" fill="#3B4A52"/><rect x="57" y="-5" width="57" height="4" fill="#fff" stroke="#3B4A52" stroke-width=".6"/><text x="0" y="7">0</text><text x="57" y="7" text-anchor="middle">50</text><text x="114" y="7" text-anchor="middle">100 m</text></g>
+  <g transform="translate(24,330)"><circle r="12" fill="#fff" fill-opacity=".85"/><path d="M0 -9 L4 3 L0 1 L-4 3Z" fill="#15212B"/><text y="-12.5" font-size="8" text-anchor="middle" fill="#fff" font-weight="700">N</text></g>
+  <text x="40" y="24" font-size="12" fill="#fff" fill-opacity=".9" text-anchor="start" font-weight="700" letter-spacing="2">台灣海峽</text>
+  <g transform="translate(${M(96)},14)"><rect x="-34" y="-9" width="68" height="15" rx="7.5" fill="#fff" fill-opacity=".88"/><text y="2" font-size="9" fill="#3B4A52" text-anchor="middle" font-weight="700">鹽風里聚落</text></g>`;
+ /* 五個地號（圖釘＋標籤） */
+ const pins=[[M(110),72,"up"],[M(140),290,"up"],[M(300),206,"up"],[M(50),190,"up"],[M(430),286,"right"]];
+ const parcels=CH.map((c,i)=>{const [x,y,dir]=pins[i];const d=S.done[c.id];const fill=d?"var(--good)":"#15212B";
+  const bx=dir==="right"?x+6:x-38,by=dir==="right"?y-15:y-40;
+  const tail=dir==="right"?`<path d="M${x+6} ${y-4} L${x+1} ${y} L${x+6} ${y+4}Z" fill="${fill}" class="tail"/>`:`<path d="M${x-5} ${y-10} L${x} ${y-3} L${x+5} ${y-10}Z" fill="${fill}" class="tail"/>`;
+  return `<g class="parcel" tabindex="0" role="button" aria-label="第${c.id}關 ${c.title}" data-act="open" data-ch="${c.id}">
+  <g filter="url(#m-sh)"><rect class="badge" x="${bx}" y="${by}" width="76" height="30" rx="6" fill="${fill}" stroke="#fff" stroke-width="1.2"/>${tail}</g>
+  <circle cx="${x}" cy="${y}" r="3" fill="#fff" stroke="${fill}" stroke-width="1.6"/>
+  <text x="${bx+38}" y="${by+12}" text-anchor="middle" fill="#fff" fill-opacity=".85" font-size="8.5" font-family="IBM Plex Mono,monospace">${c.lot.replace("鹽風段 ","地號 ")}${d?" ✓":""}</text>
+  <text x="${bx+38}" y="${by+24}" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">${c.verb}</text></g>`}).join("");
+ return `<svg class="map" viewBox="0 0 ${W} ${H}" role="img" aria-label="鹽風里鳥瞰示意圖（北方朝上）：西側為台灣海峽與沙灘上的陸域風機，中間為濕地與魚塭，東側為聚落與農田">
+ <defs>
+  <linearGradient id="m-sea" x1="0" x2="1"><stop offset="0" stop-color="#7DB4C6"/><stop offset=".5" stop-color="#4F8EAA"/><stop offset="1" stop-color="#3A7392"/></linearGradient>
+  <linearGradient id="m-pond" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3CFC6"/><stop offset="1" stop-color="#6FA69D"/></linearGradient>
+  <linearGradient id="m-shallow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B8D8D4"/><stop offset="1" stop-color="#8DBDB8"/></linearGradient>
+  <linearGradient id="m-pv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D5B93"/><stop offset=".45" stop-color="#25396A"/><stop offset=".55" stop-color="#4A68A3"/><stop offset="1" stop-color="#22355F"/></linearGradient>
+  <pattern id="m-pvgrid" width="5.5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0H5.5M0 0V5" stroke="#9FB3D9" stroke-opacity=".7" stroke-width=".45" fill="none"/></pattern>
+  <filter id="m-sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx=".8" dy="1.4" stdDeviation=".9" flood-color="#000" flood-opacity=".32"/></filter>
+  <filter id="m-grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .2  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .5 0"/></filter>
+ </defs>
+ <g transform="translate(${W},0) scale(-1,1)">
+ <rect width="${W}" height="${H}" fill="#CBD3A3"/>
+ ${fields}
+ <rect x="0" y="0" width="205" height="232" fill="#D6D7B8"/>
+ <path d="M0 226 H${roadX(226).toFixed(1)}" stroke="#8C8B84" stroke-width="5"/><path d="M0 226 H${roadX(226).toFixed(1)}" stroke="#F3EFE2" stroke-width=".8" stroke-dasharray="5 5"/>
+ <path d="M84 0 V226 M0 92 H205 M150 92 V226" stroke="#B8B5A3" stroke-width="3"/>
+ ${trees}${houses}${temple}${center}
+ ${wet}${eco}${birds}
+ ${dikes}${ponds}${pv}${plan}
+ ${road}
+ <path d="${sandPath}" fill="#E8DCB4"/>${pines}
+ <path d="${seaPath}" fill="url(#m-sea)"/>${waves}
+ ${turb}
+ <rect width="${W}" height="${H}" filter="url(#m-grain)" opacity=".35" style="mix-blend-mode:multiply" pointer-events="none"/>
+ ${dist}
+ </g>
+ ${centerLbl}${ecoLbl}${planLbl}${distLbl}${deco}
+ ${parcels}</svg>`;
+}
+function home(){
+ const n=Object.keys(S.done).length;
+ const preDone=S.pre.every(x=>x>0);
+ return `<section class="notice"><div class="stamp">公聽會<br>公告</div>
+ <span class="eyebrow">鹽風里綠能設置計畫 · 5 節課 · 5 個地號</span>
+ <h1 style="margin-top:6px">我支持綠能，<br>但不要在我家？</h1>
+ <p class="lead">縣府要在鹽風里的魚塭設置光電板，海岸邊再立 12 座風機。你會走過 5 個地號：先覺察自己的矛盾，再拿出法律工具、分辨網路謠言，接著走進公聽會扮演一位居民，最後為鹽風里設計一套更好的參與流程。</p>
+ ${mapSVG()}
+ <div class="chapters">${CH.map(c=>`<button class="chap ${S.done[c.id]?"done":""}" data-act="open" data-ch="${c.id}"><span class="lot">${c.lot} · 第${c.id}節</span><b>${c.title}</b><span class="state">${S.done[c.id]?"已完成":c.verb+" · "+c.steps.length+" 步"}</span></button>`).join("")}</div>
+ </section>
+ <section class="panel" style="margin-top:16px"><div class="stack">
+ <h3>出發前：登記與 SEL 前測</h3>
+ <div class="grid2"><label class="f">暱稱或姓名<input type="text" id="f-name" data-bind="name" value="${esc(S.name)}" placeholder="例如：小安"></label>
+ <label class="f">座號<input type="text" id="f-seat" data-bind="seat" value="${esc(S.seat)}" placeholder="例如：17"></label></div>
+ <p class="muted" style="font-size:14px">依你現在的狀況選 1–5（1 = 非常不同意，5 = 非常同意）。這份前測會在第五關和後測比較。</p>
+ ${selForm("pre")}
+ <div class="row"><button class="primary" data-act="open" data-ch="${n>=5?5:(CH.find(c=>!S.done[c.id])||CH[0]).id}" ${preDone?"":"disabled"}>${n?"繼續闖關":"開始第一關"}</button>${preDone?"":'<span class="muted" style="font-size:14px">完成 8 題前測後開始</span>'}
+ <button class="ghost" data-act="reset" style="margin-left:auto">清除紀錄重新開始</button></div>
+ </div></section>`;
+}
+function selForm(k){
+ return `<div class="sel">${SEL.map(([g,t],i)=>`<div class="item"><span><span class="eyebrow">${g}</span><br>${i+1}. ${t}</span><div class="lk" role="group" aria-label="第${i+1}題">${[1,2,3,4,5].map(v=>`<button data-act="sel" data-k="${k}" data-i="${i}" data-v="${v}" ${pressed(S[k][i]===v)}>${v}</button>`).join("")}</div></div>`).join("")}</div>`;
+}
+function chapter(id){
+ const c=CH.find(x=>x.id===id);const st=S.step[id]||0;
+ const body=[ch1,ch2,ch3,ch4,ch5][id-1](st);
+ const last=st===c.steps.length-1;
+ return `<div class="chhead"><span class="eyebrow">${c.lot} · 第${c.id}節 · ${c.verb} · 學習目標 ${c.goal}</span><h2>${c.title}</h2></div>
+ <nav class="steps" aria-label="步驟">${c.steps.map((s,i)=>`<button data-act="step" data-i="${i}" ${i===st?'aria-current="step"':""} class="${i<st||S.done[id]?"ok":""}">${i+1}. ${s}</button>`).join("")}</nav>
+ <section class="panel ${[2,3,4].includes(id)&&st>=1?"wide":""}">${body}</section>
+ <div class="nav"><button data-act="${st===0?"home":"prev"}">${st===0?"← 回地圖":"← 上一步"}</button>
+ ${last?`<button class="primary" data-act="finish" data-ch="${id}">${id===5?"完成全部關卡":"完成本關，回地圖"}</button>`:`<button class="primary" data-act="next">下一步 →</button>`}</div>`;
+}
+
+/* ---------- CHAPTER 1 ---------- */
+function emoPicker(key){
+ const sel=S.c1[key]||[];
+ const chip=(w,neg)=>`<button class="chip ${neg?"neg":""}" data-act="emo" data-k="${key}" data-w="${w}" ${pressed(sel.includes(w))}>${w}</button>`;
+ return `<div class="stack" style="gap:8px"><span class="eyebrow">正向</span><div class="row" style="gap:6px">${EMO_POS.map(w=>chip(w)).join("")}</div>
+ <span class="eyebrow">負向</span><div class="row" style="gap:6px">${EMO_NEG.map(w=>chip(w,1)).join("")}</div><span class="muted" style="font-size:13px">最多選 3 個，已選：${sel.join("、")||"無"}</span></div>`;
+}
+function scaleRow(k){return `<div class="scale" role="group">${SCALE.map((t,i)=>`<button data-act="vote" data-k="${k}" data-v="${i}" ${pressed(S.c1[k]===i)}>${t}</button>`).join("")}</div>`}
+function ch1(st){
+ const c=S.c1;
+ if(st===0)return `<div class="stack"><span class="eyebrow">兩段式投票 · 第一題</span><h3>你支持發展綠能嗎？</h3>${scaleRow("v1")}<p class="q">投完票，這一刻你的感受是？</p>${emoPicker("e1")}</div>`;
+ if(st===1){
+  let cmp="";
+  if(c.v1>=0&&c.v2>=0){const d=c.v2-c.v1;
+   cmp=`<div class="compare"><span>第一次</span><div class="bar"><i style="width:${(c.v1+1)*20}%"></i></div><span>${SCALE[c.v1]}</span><span>第二次</span><div class="bar b"><i style="width:${(c.v2+1)*20}%"></i></div><span>${SCALE[c.v2]}</span></div>
+   <div class="note ${d<0?"":"pond"}">${d<0?`你的支持度往下掉了 ${-d} 格。這很正常：很多人支持綠能，但設施靠近自己時會有不同感受。這份矛盾就是本單元的起點。`:d>0?"你的支持度反而上升了。想一想：是什麼讓你更願意它蓋在附近？":"你的支持度沒有變。想一想：如果真的每天聽到風機聲，你還會一樣嗎？"}</div>
+   <label class="f">兩次投票之間，你的感受有什麼不同？<small>試著用情緒詞彙說：「第一次我感到…，第二次我感到…，因為…」</small><textarea id="c1-change" data-bind="c1.change">${esc(c.change)}</textarea></label>`}
+  return `<div class="stack"><span class="eyebrow">兩段式投票 · 第二題</span><h3>如果風機或光電板就蓋在你家旁邊呢？</h3>${scaleRow("v2")}<p class="q">這一次，你的感受是？</p>${emoPicker("e2")}${cmp}</div>`;
+ }
+ if(st===2){
+  let got=0,tot=0,filled=0;const chk=!!c.matchChecked;
+  const cards=CASES.map(cs=>`<div class="case"><span class="tag ${cs.id==="solar"?"s":""}">${cs.tag}</span><h3>${cs.title}</h3><ul>${cs.facts.map(f=>`<li>${f}</li>`).join("")}</ul>
+   <p class="q" style="font-size:15px">各方在乎什麼？</p>
+   ${cs.q.map(([who,ans,k])=>{tot++;const v=c.match[k]||"";if(v)filled++;if(v===ans)got++;
+    return `<label class="f" style="font-weight:400">${who}<select id="m-${k}" data-act="match" data-k="${k}"><option value="">選一項</option>${cs.opts.map(o=>`<option ${o===v?"selected":""}>${o}</option>`).join("")}</select>${chk&&v?`<span class="fb ${v===ans?"good":"warn"}">${v===ans?"對，這是他們最在意的。":"再想想：回到上面的事實，這個身分最直接受影響的是什麼？"}</span>`:""}</label>`}).join("")}</div>`).join("");
+  return `<div class="stack"><span class="eyebrow">拼圖閱讀</span><h3>兩個真實案例：發生了什麼、各方在乎什麼</h3><p class="muted">課堂上你會先加入其中一組成為專家，再回原小組教別人。這裡兩組都讀，並配對每個身分最在乎的事。每組的 8 個選項裡，只有 4 個屬於這個案例，選完 8 題才能對答案。</p><div class="grid2">${cards}</div>
+  <div class="row"><button class="primary" data-act="matchcheck" ${filled<tot?"disabled":""}>對答案</button>${chk?`<span class="mono" style="font-size:13px">配對正確 ${got} / ${tot}</span>`:`<span class="muted" style="font-size:14px">已作答 ${filled} / ${tot}</span>`}</div></div>`;
+ }
+ if(st===3){
+  return `<div class="stack"><span class="eyebrow">定格畫面 · 思緒追蹤</span><h3>選一個畫面，替畫面裡的人說出內心話</h3>
+  <div class="roles">${SCENES.map(s=>`<button class="role" data-act="scene" data-v="${s.id}" ${pressed(c.scene===s.id)}><b>${s.t}</b><small>可以扮演：${s.p}</small></button>`).join("")}</div>
+  ${c.scene?`<label class="f">老師拍拍你的肩膀：「你現在心裡在想什麼？」<small>用第一人稱寫 2–3 句，說出角色的擔心或期待。不想上台的同學，老師會代為朗讀。</small><textarea id="c1-inner" data-bind="c1.inner" placeholder="我……">${esc(c.inner)}</textarea></label>
+  <div class="note pond">關鍵提問：苑裡居民說「不反綠能，只反不當選址」，你同意嗎？想好答案，帶到下一步。</div>`:""}</div>`;
+ }
+ return `<div class="stack"><span class="eyebrow">總結活動</span><h3>把「情緒」和「立場」分開寫</h3>
+  <label class="f">我的情緒<small>例如：我感到矛盾，因為我想減碳，也想睡得好。</small><textarea id="c1-feel" data-bind="c1.feel">${esc(c.feel)}</textarea></label>
+  <label class="f">我目前的立場<small>例如：我支持綠能，但風機應該離住家更遠。</small><textarea id="c1-stance" data-bind="c1.stance">${esc(c.stance)}</textarea></label>
+  <p class="muted">兩兩討論：你的情緒怎麼影響了你的立場？</p>
+  <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div>
+  <div class="note">課後任務：訪談一位家人——「如果家附近要設置綠能設施，你的感受與考量是什麼？」下一節分享。</div></div>`;
+}
+
+/* ---------- CHAPTER 2 ---------- */
+function ch2(st){
+ const c=S.c2;
+ if(st===0){
+  const sc=(k,title,desc,ik)=>`<div class="case"><h3>${title}</h3><p>${desc}</p><div class="seg lbl" role="group">${["可以","有條件可以","不可以"].map(v=>`<button data-act="set" data-k="c2.${k}" data-v="${v}" ${pressed(c[k]===v)}>${v}</button>`).join("")}</div>
+   <label class="f" style="font-weight:400">我對這件事的感受強度：<b class="mono">${c[ik]}</b> / 5<input type="range" min="1" max="5" id="c2-${ik}" data-bind="c2.${ik}" data-num="1" value="${c[ik]}"></label></div>`;
+  return `<div class="stack"><span class="eyebrow">情境判斷</span><h3>「我的土地我作主」，可以嗎？鄰居可以反對嗎？</h3>
+  <div class="grid2">${sc("s1","情境一：騎樓","騎樓是房屋所有人的土地，卻要讓行人通行，不能隨意堆放東西或封起來。","i1")}${sc("s2","情境二：出租給光電","林伯把自己的農地租給光電業者，鄰居擔心光電板反光、改變排水。","i2")}</div>
+  ${c.s1&&c.s2?`<div class="law"><span class="mono">民法 第 765 條</span>所有人，於法令限制之範圍內，得自由使用、收益、處分其所有物，並排除他人之干涉。</div>
+  <div class="note">重點在「於法令限制之範圍內」。所有權受憲法第 15 條保障，但依憲法第 23 條，為了增進公共利益等必要情形，可以用法律加以限制。騎樓就是所有權被限制的例子；林伯出租土地是行使所有權，但仍要遵守土地使用與環評等規定。</div>`:""}</div>`;
+ }
+ if(st===1){
+  return `<div class="stack"><span class="eyebrow">工具講解</span><h3>檢視政府核准決定的兩項工具</h3>
+  <div class="grid2"><div class="case"><span class="tag s">工具一</span><h3>比例原則</h3><ul><li><b>目的正當</b>：限制人民權利的目的是公益嗎？</li><li><b>手段適當</b>：這個手段能達成目的嗎？</li><li><b>最小侵害</b>：有沒有影響更小的替代做法？</li><li><b>利益衡平</b>：得到的公益，大於造成的損害嗎？</li></ul></div>
+  <div class="case"><span class="tag">工具二</span><h3>正當程序</h3><ul><li><b>資訊公開</b>：受影響的人看得到、看得懂資料嗎？</li><li><b>民眾參與</b>：受影響的人有機會表達並被討論嗎？</li><li><b>說明理由</b>：決定有說明為什麼、並回應反對意見嗎？</li></ul><p class="muted" style="font-size:14px">外部成本：噪音、生態衝擊由附近居民與環境承擔，但用電的好處分散到遠方。</p></div></div>
+  <p class="q">快速檢查</p>${TOOLBOX.map((t,i)=>{const v=c.tb[i];return `<div class="stack" style="gap:6px"><span>${i+1}. ${t.q}</span><div class="seg lbl">${t.o.map((o,j)=>`<button data-act="tb" data-i="${i}" data-v="${j}" ${pressed(v===j)}>${o}</button>`).join("")}</div>${v!=null?`<span class="fb ${v===t.a?"good":"bad"}">${v===t.a?"答對了。":"再看一次上面的工具卡。"}</span>`:""}</div>`}).join("")}</div>`;
+ }
+ if(st===2){
+  const chk=c.balChecked;let score=0;
+  const rows=BALANCE.map(b=>{const v=c.bal[b.id];const ok=b.ok.includes(v);if(ok)score++;
+   return `<tr><td style="white-space:nowrap"><span class="eyebrow">${b.grp}</span><br><b>${b.item}</b></td><td style="min-width:220px">${b.fact}${chk&&v?`<div class="fb ${ok?"good":"warn"}"><b>${ok?"有道理":"可以再想想"}。</b>${b.why}</div>`:""}</td>
+   <td><div class="seg" role="group" aria-label="${b.item}">${["合理","有爭議","不合理"].map(o=>`<button data-act="bal" data-k="${b.id}" data-v="${o}" ${pressed(v===o)}>${o}</button>`).join("")}</div></td></tr>`}).join("");
+  const n=Object.keys(c.bal).length;
+  return `<div class="stack"><span class="eyebrow">案例檢視 · 公益衡量判斷表</span><h3>縣府核准鹽風里綠能計畫，這個決定合理嗎？</h3>
+  <p class="muted">逐項判斷「合理／有爭議／不合理」。很多項目沒有唯一答案，重點是你能說出理由和證據。</p>
+  <div class="tablewrap"><table class="matrix"><thead><tr><th>檢視項目</th><th>鹽風里的事實</th><th>你的判斷</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div class="row"><button class="primary" data-act="balcheck" ${n<7?"disabled":""}>對照參考判斷</button>${chk?`<span class="mono">和參考判斷一致 ${score} / 7</span>`:`<span class="muted" style="font-size:14px">已判斷 ${n} / 7</span>`}</div>
+  <div class="note pond">進階延伸：共有土地依土地法第 34 條之 1，共有人過半數且應有部分合計過半數同意（或應有部分合計超過三分之二），就能處分整筆土地。持份少的共有人，權益要怎麼保障？</div></div>`;
+ }
+ return `<div class="stack"><span class="eyebrow">組間交叉提問 · 出口卡</span><h3>追問、反思，再看看德國的例子</h3>
+  <label class="f">針對你判斷為「有爭議」的一項，向對方小組提出一個追問<small>例如：如果夜間噪音超標，誰負責監測、多久內要改善？</small><textarea id="c2-ask" data-bind="c2.ask">${esc(c.ask)}</textarea></label>
+  <label class="f">出口卡：為什麼「程序」會影響人們的情緒？<textarea id="c2-exit" data-bind="c2.exit">${esc(c.exit)}</textarea></label>
+  <div class="case"><span class="tag s">國際對照</span><h3>德國呂策拉特村（Lützerath）</h3><p>為了擴大露天褐煤礦，村民自 2006 年起陸續遷離。政府與能源公司協議把當地燃煤退場提前到 2030 年，並保留其他村莊，但呂策拉特仍在 2023 年初被清空拆除。化石能源和綠能一樣，都需要土地。</p></div>
+  <div class="grid2"><label class="f">和台灣綠能案例的一個相同點<textarea id="c2-same" data-bind="c2.same">${esc(c.same)}</textarea></label><label class="f">一個不同點<textarea id="c2-diff" data-bind="c2.diff">${esc(c.diff)}</textarea></label></div></div>`;
+}
+
+/* ---------- CHAPTER 3 ---------- */
+function fakeImg(){
+ /* 擬真風格的「AI 生成」貼文附圖。刻意保留三個破綻：光電板延伸到樹冠上、招牌文字是亂碼、兩組陰影方向相反（太陽在左上）。 */
+ let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+ let forest="";for(let i=0;i<170;i++){const x=rnd()*400,y=88+rnd()*120;const yy=y;if(yy<100+Math.abs(x-250)*-.0)continue;const s=2.5+rnd()*4;forest+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${s.toFixed(1)}" fill="${["#3E6A3A","#4C7B43","#36603A","#5A8A4B"][Math.floor(rnd()*4)]}"/>`}
+ let rows="";
+ for(let r=0;r<6;r++){
+  const y=104+r*14+r*r*.9,h=8+r*1.6,x0=96-r*12,x1=332+r*9,n=12+r;
+  const mw=(x1-x0)/n;
+  rows+=`<path d="M${x0} ${(y+h+2).toFixed(1)} L${x1} ${(y+h+2).toFixed(1)}" stroke="#1D2A1C" stroke-opacity=".45" stroke-width="${(2+r*.5).toFixed(1)}"/>`;
+  for(let k=0;k<n;k++){const x=x0+k*mw;
+   rows+=`<path d="M${(x+1.2).toFixed(1)} ${(y+h).toFixed(1)} L${(x+mw-.4).toFixed(1)} ${(y+h).toFixed(1)} L${(x+mw-.4+2).toFixed(1)} ${y.toFixed(1)} L${(x+1.2+2).toFixed(1)} ${y.toFixed(1)}Z" fill="url(#f-pv)" stroke="#B9C6DC" stroke-width=".5"/>`;
+   rows+=`<line x1="${(x+mw/2+.6).toFixed(1)}" y1="${(y+h).toFixed(1)}" x2="${(x+mw/2+1.6).toFixed(1)}" y2="${y.toFixed(1)}" stroke="#8FA3C7" stroke-opacity=".5" stroke-width=".4"/>`;
+  }
+ }
+ /* 破綻一：樹冠上的光電板 */
+ const tree=`<g><rect x="58" y="118" width="5" height="40" fill="#5A4632"/><circle cx="60" cy="108" r="24" fill="#3F6B3B"/><circle cx="48" cy="100" r="12" fill="#4F7F47"/><circle cx="72" cy="98" r="11" fill="#4A7843"/>
+  ${[0,1,2].map(k=>`<path d="M${40+k*14} 104 L${53+k*14} 104 L${55+k*14} 96 L${42+k*14} 96Z" fill="url(#f-pv)" stroke="#B9C6DC" stroke-width=".5"/>`).join("")}</g>`;
+ /* 破綻三：右側樹影往右（正確），左側招牌影子往左（錯誤） */
+ const rtree=`<path d="M352 196 L394 186 Q402 193 394 199 L357 199Z" fill="#000" fill-opacity=".28"/><rect x="352" y="160" width="5" height="36" fill="#5A4632"/><circle cx="355" cy="150" r="17" fill="#3B6537"/><circle cx="347" cy="144" r="8" fill="#4F7F47"/>`;
+ /* 破綻二：亂碼招牌 */
+ const sign=`<path d="M63 216 L107 216 L64 225 L16 225Z" fill="#000" fill-opacity=".28"/><rect x="62" y="186" width="3" height="30" fill="#6B6B66"/><rect x="104" y="186" width="3" height="30" fill="#6B6B66"/>
+  <rect x="48" y="170" width="72" height="22" rx="1.5" fill="#F4F2EA" stroke="#55534C" stroke-width="1"/><text x="84" y="186" font-size="11.5" text-anchor="middle" fill="#2F3B2E" font-weight="700" font-family="Noto Sans TC,PingFang TC,Microsoft JhengHei,sans-serif">太陽能園匚尢</text>`;
+ return `<svg viewBox="0 0 400 225" aria-label="模擬貼文附圖：一座山坡被大片光電板覆蓋">
+ <defs>
+  <linearGradient id="f-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8DB6D6"/><stop offset=".7" stop-color="#D4E2EA"/><stop offset="1" stop-color="#E9EEE9"/></linearGradient>
+  <radialGradient id="f-sun" cx=".14" cy=".1" r=".35"><stop offset="0" stop-color="#FFF8DC" stop-opacity=".95"/><stop offset=".25" stop-color="#FFF1C4" stop-opacity=".45"/><stop offset="1" stop-color="#FFF1C4" stop-opacity="0"/></radialGradient>
+  <linearGradient id="f-pv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4E6CA6"/><stop offset=".5" stop-color="#22355F"/><stop offset=".62" stop-color="#5B79B0"/><stop offset="1" stop-color="#1D2D52"/></linearGradient>
+  <linearGradient id="f-hill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5C8650"/><stop offset="1" stop-color="#3D6436"/></linearGradient>
+  <radialGradient id="f-vig" cx=".5" cy=".5" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></radialGradient>
+ </defs>
+ <rect width="400" height="225" fill="url(#f-sky)"/><rect width="400" height="225" fill="url(#f-sun)"/>
+ <path d="M0 96 C60 70 110 78 160 66 C220 52 260 70 310 60 C350 54 380 62 400 70 L400 225 L0 225Z" fill="#A6B9BC"/>
+ <path d="M0 112 C70 90 130 96 190 80 C250 66 300 84 400 82 L400 225 L0 225Z" fill="#7D9A8A"/>
+ <path d="M0 130 C50 104 120 100 210 86 C290 76 340 96 400 104 L400 225 L0 225Z" fill="url(#f-hill)"/>
+ ${forest}${rows}${tree}${rtree}${sign}
+ <rect width="400" height="225" fill="url(#f-vig)"/>
+ </svg>`;
+}
+function ch3(st){
+ const c=S.c3;
+ if(st===0||st===1){
+  const showLab=st===1;
+  const feed=POSTS.map(p=>{const v=c.lab[p.id];const ok=v===p.ans;
+   return `<article class="post"><div class="who"><span class="avatar" style="background:${p.ans==="合理擔憂"?"var(--pond)":"var(--muted)"}">${p.av}</span><div><b>${p.user}</b><div class="meta">${p.time}</div></div><span class="sim">模擬貼文</span></div>
+   <div class="body">${p.body}</div>${p.img?fakeImg():""}<div class="react">${p.react}</div>
+   ${showLab?`<div class="seg lbl" role="group" aria-label="判斷" style="flex-wrap:wrap">${LABELS.map(l=>`<button data-act="lab" data-k="${p.id}" data-v="${l}" ${pressed(v===l)}>${l}</button>`).join("")}</div>${c.labChecked&&v?`<div class="fb ${ok?"good":"warn"}"><b>${ok?"判斷正確":"參考判斷："+p.ans}。</b>${p.why}</div>`:""}`:""}</article>`}).join("");
+  if(st===0)return `<div class="stack"><span class="eyebrow">情緒快照 · 2 分鐘</span><h3>快速滑過這些貼文，記下第一眼的感受</h3><p class="muted">這些貼文和帳號都是為了課堂自製的，沒有使用真實個資。</p>
+   <div class="grid2" style="align-items:start"><div class="feed">${feed}</div><div class="stack" style="position:sticky;top:12px">
+   <p class="q">看完的第一個情緒是？（最多 3 個）</p><div class="row" style="gap:6px">${[...EMO_NEG.slice(0,8),"好奇","懷疑","平靜"].map(w=>`<button class="chip" data-act="snap" data-w="${w}" ${pressed(c.snapEmo.includes(w))}>${w}</button>`).join("")}</div>
+   <label class="f" style="font-weight:400">情緒強度：<b class="mono">${c.snapInt}</b> / 5<input type="range" min="1" max="5" id="c3-int" data-bind="c3.snapInt" data-num="1" value="${c.snapInt}"></label>
+   <div class="note">關鍵提問：這則貼文想讓你有什麼感覺？</div></div></div></div>`;
+  const n=Object.keys(c.lab).length,score=POSTS.filter(p=>c.lab[p.id]===p.ans).length;
+  return `<div class="stack"><span class="eyebrow">辨識操弄 · 貼文檢核表</span><h3>這則貼文是哪一種？</h3>
+  <div class="case"><b>貼文檢核表</b><ul>${CHECKS.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  <div class="feed">${feed}</div>
+  <div class="row"><button class="primary" data-act="labcheck" ${n<POSTS.length?"disabled":""}>揭曉答案</button>${c.labChecked?`<span class="mono">判斷正確 ${score} / ${POSTS.length}</span>`:`<span class="muted" style="font-size:14px">已判斷 ${n} / ${POSTS.length}</span>`}</div>
+  ${c.labChecked?`<div class="note pond">合理擔憂（例如噪音、生態）值得被認真回應；把它們和謠言混在一起貼上「反綠能」標籤，當事人會覺得委屈、不被聽見。</div>`:""}</div>`;
+ }
+ if(st===2){
+  const got=REPORT_ISSUES.filter((r,i)=>r.ok===c.rep.includes(i)).length;
+  return `<div class="stack"><span class="eyebrow">對照監測報告</span><h3>業者公布了噪音監測報告。誰提供的數據？少了什麼？</h3>
+  <div class="report"><div class="h"><span>鹽風里風力發電計畫 環境噪音監測摘要</span><span class="mono" style="font-weight:400">模擬資料</span></div>
+  <div class="tablewrap"><table><thead><tr><th>測點</th><th>量測時段</th><th>均能音量 L<sub>eq</sub></th><th>管制標準（示意）</th></tr></thead><tbody>
+  <tr><td>A 鹽風里活動中心</td><td>3/12 10:00–16:00</td><td>48 dB(A)</td><td>60 dB(A)</td></tr>
+  <tr><td>B 漁港停車場</td><td>3/12 10:00–16:00</td><td>52 dB(A)</td><td>60 dB(A)</td></tr>
+  <tr><td>C 濱海路口</td><td>3/12 10:00–16:00</td><td>50 dB(A)</td><td>60 dB(A)</td></tr></tbody></table></div>
+  <p style="padding:8px 12px" class="muted">委託單位：鹽風綠能股份有限公司　結論：各測點均符合管制標準。</p></div>
+  <p class="q">勾選這份報告需要補強的地方（可複選）</p>
+  ${REPORT_ISSUES.map((r,i)=>`<label class="check"><input type="checkbox" data-act="rep" data-i="${i}" ${c.rep.includes(i)?"checked":""}><span>${r.t}${c.repChecked?` <b style="color:${r.ok===c.rep.includes(i)?"var(--good)":"var(--warn)"}">${r.ok?"← 需要補強":"← 這不是問題"}</b>`:""}</span></label>`).join("")}
+  <div class="row"><button class="primary" data-act="repcheck">對照</button>${c.repChecked?`<span class="mono">正確 ${got} / ${REPORT_ISSUES.length}</span>`:""}</div>
+  ${c.repChecked?`<div class="note">查證不是只問「數字有沒有超標」，還要問：誰量的、什麼時候量、量了什麼、在哪裡量。美玲擔心的是「晚上」和「低頻」，這份報告剛好都沒有回答。</div>`:""}</div>`;
+ }
+ if(st===3){
+  const fb=c.replyFb;
+  return `<div class="stack"><span class="eyebrow">停一下再回應 · 四步驟</span><h3>你在留言區看到這則留言</h3>
+  <article class="post"><div class="who"><span class="avatar">碳</span><b>${ATTACK.user}</b><span class="sim">模擬留言</span></div><div class="body">${ATTACK.text}</div></article>
+  <div class="case"><b>① 暫停</b><p class="muted" style="font-size:14px">先不要回。手離開鍵盤，吸氣四秒、吐氣四秒。</p></div>
+  <div class="case"><b>② 命名情緒</b><div class="row" style="gap:6px">${["生氣","煩躁","委屈","害怕","無力","想反擊","同情","平靜"].map(w=>`<button class="chip" data-act="arr" data-k="c3.emo" data-w="${w}" ${pressed(c.emo.includes(w))}>${w}</button>`).join("")}</div></div>
+  <div class="case"><b>③ 查證：回應前，我要先確認</b>${VERIFY.map((v,i)=>`<label class="check"><input type="checkbox" data-act="arrcb" data-k="c3.ver" data-w="${i}" ${c.ver.includes(String(i))?"checked":""}><span>${v}</span></label>`).join("")}</div>
+  <div class="case"><b>④ 再決定</b><div class="seg lbl" style="flex-wrap:wrap">${["寫一則不升高衝突的回應","先不回應，改用自保方法"].map(v=>`<button data-act="set" data-k="c3.action" data-v="${v}" ${pressed(c.action===v)}>${v}</button>`).join("")}</div>
+  ${c.action==="寫一則不升高衝突的回應"?`<label class="f" style="font-weight:400">你的回應<small>提示：不攻擊人、說出事實或問題、留空間給不同意見。</small><textarea id="c3-reply" data-bind="c3.reply">${esc(c.reply)}</textarea></label>
+   <div class="row"><button data-act="replyfb" ${c.reply.trim().length<8?"disabled":""}>${claudeState==="on"?"請 Claude 給回饋":"檢查我的回應"}</button><span id="reply-status" class="thinking"></span></div>
+   ${fb?`<div class="fb ${fb.ok?"good":"warn"}"><b>${fb.ok?"這則回應能降溫":"可以再調整"}。</b>${esc(fb.text)}${fb.tip?`<br><span class="muted">示範：</span>${esc(fb.tip)}`:""}</div>`:""}`:""}
+  ${c.action==="先不回應，改用自保方法"?`<div class="note pond">先不回應也是一種選擇。下一步來整理你的自保方法。</div>`:""}</div>
+  <div class="note">關鍵提問：合理的擔憂被貼上「反綠能」標籤時，當事人會有什麼感受？</div></div>`;
+ }
+ return `<div class="stack"><span class="eyebrow">總結活動 · 策略卡</span><h3>遭遇網路攻擊時，我會怎麼保護自己？</h3>
+  <div class="row" style="gap:6px">${SAFE.map(w=>`<button class="chip" data-act="arr" data-k="c3.safe" data-w="${w}" ${pressed(c.safe.includes(w))}>${w}</button>`).join("")}</div>
+  <label class="f">寫下一個你真的會用的自我保護策略<textarea id="c3-strategy" data-bind="c3.strategy" placeholder="當我看到……，我會……">${esc(c.strategy)}</textarea></label>
+  <div class="note pond">預告：下一節是戲劇公聽會，你會抽到一個角色。</div></div>`;
+}
+
+/* ---------- CHAPTER 4 ---------- */
+function ch4(st){
+ const c=S.c4;
+ if(st===0){
+  const r=roleById(c.role);
+  return `<div class="stack"><span class="eyebrow">角色情緒卡</span><h3>選一個角色。公聽會上，你就是他。</h3>
+  <div class="roles">${ROLES.map(x=>`<button class="role" data-act="role" data-v="${x.id}" ${pressed(c.role===x.id)}><b>${x.name}</b><small>${x.who}</small></button>`).join("")}</div>
+  ${r?`<div class="case"><h3>${r.who}</h3><p>${r.open}</p><p class="muted" style="font-size:14px">${r.id==="gov"?"地方政府是公法人；":r.id==="ngo"?"保育團體多為社團法人；":""}提示：他在乎「${r.care}」，害怕「${r.fear}」。</p></div>
+  <div class="grid2"><label class="f">我的角色在乎什麼？<textarea id="c4-care" data-bind="c4.care">${esc(c.care)}</textarea></label><label class="f">我的角色害怕失去什麼？<textarea id="c4-fear" data-bind="c4.fear">${esc(c.fear)}</textarea></label></div>
+  <label class="f">用「我訊息」擬好第一段發言<small>句型：我感到＿＿，因為＿＿，我希望＿＿。</small><textarea id="c4-draft" data-bind="c4.draft" placeholder="我感到……，因為……，我希望……">${esc(c.draft)}</textarea></label>`:""}</div>`;
+ }
+ if(st===1){
+  if(!c.role)return `<p>請先在上一步選一個角色。</p>`;
+  const r=roleById(c.role);
+  if(!c.log.length){
+   const first=ROLES.find(x=>x.id===OPPOSITE[c.role])||ROLES.find(x=>x.id!==c.role);
+   c.log=[{who:"主持人",kind:"mod",text:"各位鄉親好，今天的公聽會討論鹽風里的光電與風機計畫。請每一位發言時用「我感到…因為…我希望…」，並且回應前一位發言者。先請"+first.who+"。"},{who:first.who,kind:"npc",rid:first.id,text:first.open}];save();
+  }
+  const done=c.round>=3;
+  const avgS=k=>c.scores.length?(c.scores.reduce((s,x)=>s+x[k],0)/c.scores.length).toFixed(1):"–";
+  return `<div class="stack"><span class="eyebrow">戲劇公聽會 · 你是 ${r.who} · 第 ${Math.min(c.round+1,3)} / 3 輪</span>
+  <div class="hall" aria-live="polite">${c.log.map(m=>`<div class="say ${m.kind==="me"?"me":m.kind==="mod"?"mod":""}"><span class="who">${esc(m.who)}</span><div class="bub">${esc(m.text)}</div>
+   ${m.sc?`<div class="scores"><span>立場表達 <b>${m.sc.stance}</b></span><span>情緒表達 <b>${m.sc.emotion}</b></span><span>同理回應 <b>${m.sc.empathy}</b></span></div><div class="coach">${esc(m.fb||"")}${m.ex?`<br>示範：<em>${esc(m.ex)}</em>`:""}</div>`:""}</div>`).join("")}
+   <div id="hall-think" class="thinking" hidden></div></div>
+  ${done?`<div class="note pond">公聽會結束。三輪平均：立場表達 ${avgS("stance")}、情緒表達 ${avgS("emotion")}、同理回應 ${avgS("empathy")}（各 1–4 分）。</div>`:
+  `<label class="f">輪到你發言，回應上一位<small>我感到＿＿，因為＿＿，我希望＿＿。記得先回應他的擔憂。</small><textarea id="c4-say" data-bind="c4.draft" placeholder="我感到……">${esc(c.draft)}</textarea></label>
+  <div class="row"><button class="primary" data-act="speak">發言</button><span class="muted" style="font-size:13px">${claudeState==="on"?"由 Claude 扮演其他角色並依評分規準給分":"內建劇本模式：依句型自動檢核"}</span></div>`}
+  <details><summary class="muted" style="cursor:pointer">公聽會發言評分規準</summary><div class="tablewrap"><table class="matrix"><tr><th></th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
+  <tr><td>立場表達</td><td>清楚說明立場並引用比例原則或正當程序</td><td>立場清楚、理由合理</td><td>有立場但理由模糊</td><td>未表達立場</td></tr>
+  <tr><td>情緒表達</td><td>以我訊息完整說出感受、原因與需求</td><td>能說出感受與需求</td><td>以指責方式表達</td><td>未表達</td></tr>
+  <tr><td>同理回應</td><td>能複述並具體回應他人擔憂</td><td>能回應他人觀點</td><td>僅重申己見</td><td>打斷或忽略他人</td></tr></table></div></details></div>`;
+ }
+ if(st===2){
+  const w=c.walk;
+  return `<div class="stack"><span class="eyebrow">良心巷</span><h3>現在你是縣長。走過兩排鄉親，聽完再做決定。</h3>
+  <p class="walker">左排：支持設置　右排：反對或保留　已走 ${w} / ${CONSCIENCE.length} 步</p>
+  <div class="lane">${CONSCIENCE.map((v,i)=>`<div class="v ${v.s} ${i<w?"heard":""}">${i<w?v.t:"……"}</div>`).join("")}</div>
+  ${w<CONSCIENCE.length?`<button class="primary" data-act="walk">往前走一步</button>`:`
+  <p class="q">走到巷子盡頭，你的決定是？</p>
+  <div class="stack" style="gap:6px">${DECISIONS.map(d=>`<button class="role" data-act="set" data-k="c4.decision" data-v="${d}" ${pressed(c.decision===d)}>${d}</button>`).join("")}</div>
+  ${c.decision?`<label class="f">做完決定，你的內心感受是？<textarea id="c4-mf" data-bind="c4.mayorFeel">${esc(c.mayorFeel)}</textarea></label>
+  <label class="f">這個決定，誰會最難過？你可以怎麼回應他？<textarea id="c4-hurt" data-bind="c4.hurt">${esc(c.hurt)}</textarea></label>`:""}`}</div>`;
+ }
+ return `<div class="stack"><span class="eyebrow">出戲</span><h3>脫下名牌</h3>
+  <p>你剛才扮演的是<b>${esc(roleById(c.role)?.who||"一位居民")}</b>，也當了一次縣長。現在把角色放下。</p>
+  <label class="f">剛才哪一刻最有感覺？<textarea id="c4-moment" data-bind="c4.moment">${esc(c.moment)}</textarea></label>
+  <label class="f">那個感覺，是角色的情緒，還是你自己的情緒？<small>例如：生氣是角色的，但聽到漁民說沒被通知時的難過，是我自己的。</small><textarea id="c4-split" data-bind="c4.split">${esc(c.split)}</textarea></label>
+  <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div></div>`;
+}
+
+/* ---------- CHAPTER 5 ---------- */
+function ch5(st){
+ const c=S.c5;
+ if(st===0){
+  const sug=OPPOSITE[S.c4.role];const r=roleById(c.swapRole);const fb=c.swapFb;
+  return `<div class="stack"><span class="eyebrow">轉換立場 · 1 分鐘發言</span><h3>改扮和你意見相反的角色</h3>
+  ${S.c4.role?`<p class="muted">你在公聽會是${esc(roleById(S.c4.role).who)}，建議改扮：${esc(roleById(sug).who)}。</p>`:""}
+  <div class="roles">${ROLES.filter(x=>x.id!==S.c4.role).map(x=>`<button class="role" data-act="set" data-k="c5.swapRole" data-v="${x.id}" ${pressed(c.swapRole===x.id)}><b>${x.name}</b><small>${x.who}${x.id===sug?" · 建議":""}</small></button>`).join("")}</div>
+  ${r?`<div class="case"><p>${r.open}</p></div><label class="f">以${esc(r.who)}的身分發言<small>說出他的擔憂，讓原本反對他的人也能理解。</small><textarea id="c5-swap" data-bind="c5.swap">${esc(c.swap)}</textarea></label>
+  <div class="row"><button data-act="swapfb" ${c.swap.trim().length<10?"disabled":""}>${claudeState==="on"?"請 Claude 聽聽看":"檢查我的換位發言"}</button><span id="swap-status" class="thinking"></span></div>
+  ${fb?`<div class="fb ${fb.ok?"good":"warn"}"><b>${fb.ok?"你說出了對方的處境":"可以更貼近對方"}。</b>${esc(fb.text)}</div>`:""}`:""}</div>`;
+ }
+ if(st===1){
+  return `<div class="stack"><span class="eyebrow">參與案例</span><h3>延長「抱卵母蟹」禁漁期，是怎麼做到的？</h3>
+  <div class="stack" style="gap:8px">${CRAB.map(([k,t],i)=>`<div class="row" style="align-items:flex-start;flex-wrap:nowrap"><span class="mono" style="min-width:2.5em;color:var(--pond)">${i+1}.</span><span><b>${k}</b>　${t}</span></div>`).join("")}</div>
+  <p class="q">哪些做法可以借用到綠能選址？（可複選）</p>
+  ${CRAB_Q.map((t,i)=>`<label class="check"><input type="checkbox" data-act="arrcb" data-k="c5.crab" data-w="${i}" ${c.crab.includes(String(i))?"checked":""}><span>${t}${c.crab.includes(String(i))&&i===4?' <b style="color:var(--warn)">← 附議達門檻後，主管機關要回應，但不一定照提案做。</b>':""}</span></label>`).join("")}</div>`;
+ }
+ if(st===2){
+  const n=Object.keys(c.ctl).length;const all=n===CONTROL.length;
+  return `<div class="stack"><span class="eyebrow">面對無力感與氣候焦慮</span><h3>這件事，我能控制，還是不能控制？</h3>
+  <div class="sort">${CONTROL.map((x,i)=>{const v=c.ctl[i];return `<div class="it"><span>${x.t}${all&&v&&v!==x.a?' <small style="color:var(--warn)">（再想想）</small>':""}</span><div class="seg lbl">${[["can","我能控制"],["cannot","不能控制"]].map(([k,l])=>`<button data-act="ctl" data-i="${i}" data-v="${k}" ${pressed(v===k)}>${l}</button>`).join("")}</div></div>`}).join("")}</div>
+  ${all?`<div class="note pond">「不能控制」的事，常常還是「能影響」：你不能決定能源政策，但能提案、附議、旁聽、查證後再轉傳。把力氣放在能控制的事上，是面對氣候焦慮的方式之一。</div>`:""}</div>`;
+ }
+ if(st===3){
+  return `<div class="stack"><span class="eyebrow">關鍵提問</span><h3>說明會、公聽會、聽證會有什麼不同？</h3>
+  ${HEARINGQ.map((t,i)=>{const v=c.hq[i];return `<div class="stack" style="gap:6px"><span>${i+1}. ${t.q}</span><div class="stack" style="gap:6px">${t.o.map((o,j)=>`<button class="role" data-act="hq" data-i="${i}" data-v="${j}" ${pressed(v===j)}>${o}</button>`).join("")}</div>${v!=null?`<span class="fb ${v===t.a?"good":"bad"}">${v===t.a?"正確。":"再想想：哪一種程序最正式、最能影響決定？"}</span>`:""}</div>`}).join("")}</div>`;
+ }
+ if(st===4){
+  const fb=c.procFb;
+  const multi=(k,list)=>`<div class="row" style="gap:6px">${list.map(w=>`<button class="chip" data-act="arr" data-k="c5.${k}" data-w="${w}" ${pressed(c[k].includes(w))}>${w}</button>`).join("")}</div>`;
+  return `<div class="stack"><span class="eyebrow">小組任務 · 流程模板</span><h3>為鹽風里設計一套更好的綠能選址參與流程</h3>
+  <p class="q">誰參與？</p>${multi("who",STAKE)}
+  <p class="q">何時參與？</p>${multi("when",STAGES)}
+  <p class="q">用什麼方式參與？</p>${multi("how",METHODS)}
+  <label class="f">如何讓弱勢居民與生態被考量？<small>例如：承租漁民、高齡居民、黑面琵鷺</small><textarea id="c5-inc" data-bind="c5.inclusion">${esc(c.inclusion)}</textarea></label>
+  <label class="f">決策如何回應意見？<small>例如：逐條回覆、說明採納或不採納的理由、公開紀錄</small><textarea id="c5-resp" data-bind="c5.respond">${esc(c.respond)}</textarea></label>
+  <div class="row"><button class="primary" data-act="procfb">${claudeState==="on"?"請 Claude 依評分規準檢視":"依評分規準檢核"}</button><span id="proc-status" class="thinking"></span></div>
+  ${fb?`<div class="tablewrap"><table class="matrix"><thead><tr><th>參與流程評分規準</th><th>評等</th><th>回饋</th></tr></thead><tbody>${fb.items.map(x=>`<tr><td><b>${esc(x.k)}</b></td><td style="white-space:nowrap;color:${x.ok?"var(--good)":"var(--warn)"};font-weight:700">${x.ok?"優秀":"待加強"}</td><td>${esc(x.t)}</td></tr>`).join("")}</tbody></table></div>`:""}
+  <div class="note pond">關鍵提問：你的流程如何同時照顧減碳目標與在地居民？課堂上請把流程畫成海報，各組 1 分鐘發表。</div></div>`;
+ }
+ const postDone=S.post.every(x=>x>0);
+ return `<div class="stack"><span class="eyebrow">SEL 後測 · 反思</span><h3>回到出發時的 8 個問題</h3>${selForm("post")}${postDone?certificate():`<p class="muted">完成 8 題後測，就會看到你的成果卡。</p>`}</div>`;
+}
+
+/* ---------- RESULTS ---------- */
+function summary(){
+ const c1=S.c1,c2=S.c2,c3=S.c3,c4=S.c4,c5=S.c5;
+ const bal=BALANCE.filter(b=>b.ok.includes(c2.bal[b.id])).length;
+ const lab=POSTS.filter(p=>c3.lab[p.id]===p.ans).length;
+ const a=k=>c4.scores.length?+(c4.scores.reduce((s,x)=>s+x[k],0)/c4.scores.length).toFixed(1):0;
+ const proc=c5.procFb?c5.procFb.items.filter(x=>x.ok).length:0;
+ return {bal,lab,stance:a("stance"),emotion:a("emotion"),empathy:a("empathy"),proc,pre:+avg(S.pre).toFixed(2),post:+avg(S.post).toFixed(2)};
+}
+function recordText(){
+ const s=summary(),c1=S.c1,c4=S.c4,c5=S.c5;
+ return [`學生：${S.name||"（未填）"}　座號：${S.seat||"–"}`,
+ `第一關 投票：${SCALE[c1.v1]||"–"} → ${SCALE[c1.v2]||"–"}；情緒：${c1.e1.join("、")||"–"} → ${c1.e2.join("、")||"–"}`,
+ `第一關 我的立場：${c1.stance||"–"}`,
+ `第二關 公益衡量判斷表與參考判斷一致：${s.bal} / 7`,
+ `第三關 貼文辨識正確：${s.lab} / 6；自保策略：${S.c3.strategy||"–"}`,
+ `第四關 角色：${roleById(c4.role)?.who||"–"}；發言平均 立場 ${s.stance}／情緒 ${s.emotion}／同理 ${s.empathy}`,
+ `第四關 縣長決定：${c4.decision||"–"}`,
+ `第五關 換位角色：${roleById(c5.swapRole)?.who||"–"}；參與流程優秀項目：${s.proc} / 4`,
+ `SEL 前測平均 ${s.pre}　後測平均 ${s.post}　變化 ${(s.post-s.pre>=0?"+":"")+(s.post-s.pre).toFixed(2)}`,
+ `反思：${S.c4.moment||"–"}`].join("\n");
+}
+function certificate(){
+ const s=summary();
+ const bars=SEL.map(([g,t],i)=>`<span style="font-size:13px">${i+1}. ${t}</span><div class="stack" style="gap:3px"><div class="bar"><i style="width:${S.pre[i]*20}%"></i></div><div class="bar b"><i style="width:${S.post[i]*20}%"></i></div></div><span class="mono" style="font-size:12px">${S.pre[i]}→${S.post[i]}</span>`).join("");
+ return `<div class="cert"><div class="row" style="justify-content:space-between"><div><span class="eyebrow">鹽風里公聽會 · 成果卡</span><h3 style="font-size:24px;margin-top:4px">${esc(S.name||"公民")} 的鹽風里紀錄</h3></div><div class="stamp" style="position:static">完成<br>5 地號</div></div>
+ <div class="kv"><div><small>公益衡量判斷</small><b>${s.bal}/7</b></div><div><small>謠言辨識</small><b>${s.lab}/6</b></div><div><small>公聽會 同理回應</small><b>${s.empathy||"–"}/4</b></div><div><small>參與流程 優秀項目</small><b>${s.proc}/4</b></div><div><small>SEL 平均 前→後</small><b>${s.pre}→${s.post}</b></div></div>
+ <div class="legend"><span><i style="background:var(--solar)"></i>前測</span><span><i style="background:var(--pond)"></i>後測</span></div>
+ <div class="compare">${bars}</div>
+ <p class="q">交給老師的學習紀錄</p><p class="muted" style="font-size:14px">按下複製後，貼到老師指定的表單或傳給老師。紀錄只存在這台裝置的瀏覽器裡。</p>
+ <pre class="record" id="record">${esc(recordText())}</pre><div class="row"><button class="primary" data-act="copy">複製學習紀錄</button></div></div>`;
+}
+
+/* ============ CLAUDE CALLS + FALLBACKS ============ */
+function localSpeechScore(text,prev){
+ const t=text;const hasFeel=/我(感到|覺得|很|好)/.test(t)&&/(擔心|害怕|生氣|難過|焦慮|矛盾|期待|不安|委屈|失望|開心|安心|無力|感到)/.test(t);
+ const hasWhy=/因為/.test(t),hasWant=/(我希望|希望|請|能不能|可不可以)/.test(t);
+ const blame=/(你們都|都是你|自私|騙子|閉嘴|滾)/.test(t);
+ const law=/(比例|最小侵害|利益衡平|正當程序|資訊公開|民眾參與|說明理由|聽證)/.test(t);
+ const kw=(prev||"").match(/[一-龥]{2}/g)||[];const echo=kw.filter(k=>t.includes(k)&&!["我們","大家","如果","可是","但是","因為"].includes(k)).length;
+ const stance=law&&hasWhy?4:hasWhy?3:t.length>15?2:1;
+ const emotion=blame?2:hasFeel&&hasWhy&&hasWant?4:hasFeel&&hasWant?3:hasFeel?2:1;
+ const empathy=blame?1:(/(我聽到|我理解|你說|你擔心|剛才)/.test(t)&&echo>=2)?4:(echo>=2||/(我聽到|我理解|你說)/.test(t))?3:2;
+ const tips=[];if(!hasFeel)tips.push("先說出你的感受");if(!hasWhy)tips.push("補上「因為」");if(!hasWant)tips.push("說出你希望什麼");if(empathy<3)tips.push("先複述上一位的擔憂");if(stance<4&&hasWhy)tips.push("可以引用比例原則或正當程序");
+ return {scores:{stance,emotion,empathy},feedback:tips.length?"下一輪試試："+tips.join("、")+"。":"很完整的我訊息，也有回應對方。",example:""};
+}
+async function speak(){
+ const ta=$("#c4-say");const text=(ta?.value||"").trim();if(text.length<4){toast("先寫下你的發言");return}
+ const c=S.c4,r=roleById(c.role);const prev=[...c.log].reverse().find(m=>m.kind!=="me");
+ c.log.push({who:r.who+"（你）",kind:"me",text});c.draft="";c.round++;save();render();
+ const th=$("#hall-think");if(th){th.hidden=false;th.textContent=claudeState==="on"?"其他鄉親正在思考……":""}
+ let res=null;
+ if(sample&&claudeState==="on"){
+  const used=new Set(c.log.filter(m=>m.rid).map(m=>m.rid));
+  const others=ROLES.filter(x=>x.id!==c.role).map(x=>`${x.who}（${x.name}；在乎${x.care}；害怕${x.fear}）${used.has(x.id)?"［已發言］":""}`).join("\n");
+  const hist=c.log.slice(-8).map(m=>`[${m.who}] ${m.text}`).join("\n");
+  const last=c.round>=3;
+  const prompt=`${SETTING}
+你是這場公聽會的主持人兼演員，並負責依評分規準評分。
+學生扮演：${r.who}（${r.name}）。學生寫下角色在乎：${c.care||r.care}；害怕失去：${c.fear||r.fear}。
+其他角色：
+${others}
+
+發言紀錄（最近）：
+${hist}
+
+學生這次的發言（回應「${prev?prev.who:"主持人"}」）：「${text}」
+
+任務一：依評分規準為學生「這一次」發言評分（各 1–4 的整數）。
+立場表達：4=清楚說明立場並引用比例原則或正當程序；3=立場清楚、理由合理；2=有立場但理由模糊；1=未表達立場。
+情緒表達：4=以我訊息完整說出感受、原因與需求（我感到…因為…我希望…）；3=能說出感受與需求；2=以指責方式表達；1=未表達。
+同理回應：4=能複述並具體回應前一位發言者的擔憂；3=能回應他人觀點；2=僅重申己見；1=打斷或忽略他人。
+feedback：一句具體、溫和、對高中生說的回饋（45 字內）。example：一句改進示範，用「我感到…因為…我希望…」句型、以學生的角色身分說（60 字內）；若三項都是 4 分則給空字串。
+任務二：${last?"這是最後一輪。next.role 填「主持人」，next.text 由主持人用 60–90 字總結今天聽到的主要爭點，感謝大家，並說明縣府會在會後逐條回覆，不再拋問題。":"選一位最適合回應的其他角色（優先選尚未發言者，不可是學生的角色），next.role 填該角色的名字（如「業者 陳經理」），next.text 以該角色身分回應學生，70–120 字，口語、有情緒但不攻擊人，先回應學生說的內容，再提出一個具體的擔憂或問題讓學生能接著回應。"}
+只回覆 JSON：{"scores":{"stance":3,"emotion":3,"empathy":2},"feedback":"…","example":"…","next":{"role":"…","text":"…"}}`;
+  try{res=await sample.json(prompt,{cache:false});}
+  catch(e){toast(claudeFail(e));res=null}
+ }
+ let sc,fb,ex,next;
+ if(res&&res.scores&&res.next){
+  const cl=v=>Math.max(1,Math.min(4,Math.round(+v)||1));
+  sc={stance:cl(res.scores.stance),emotion:cl(res.scores.emotion),empathy:cl(res.scores.empathy)};fb=String(res.feedback||"");ex=String(res.example||"");
+  const nr=ROLES.find(x=>String(res.next.role||"").includes(x.who.split(" ")[1]||"@@"));
+  next={who:String(res.next.role||"主持人"),kind:String(res.next.role).includes("主持")?"mod":"npc",rid:nr?.id,text:String(res.next.text||"")};
+ }else{
+  const l=localSpeechScore(text,prev?.text);sc=l.scores;fb=l.feedback;ex="";
+  if(c.round>=3)next={who:"主持人",kind:"mod",text:"謝謝每一位鄉親。今天大家提到噪音監測、承租漁民的生計、黑面琵鷺的棲地，以及資訊公開。縣府會把所有意見做成紀錄，在會後逐條回覆。"};
+  else{const used=new Set(c.log.filter(m=>m.rid).map(m=>m.rid));const order=["neighbor","company","ngo","fisher","gov","youth","landlord"];
+   const pick=roleById(order.find(id=>id!==c.role&&!used.has(id))||"gov");next={who:pick.who,kind:"npc",rid:pick.id,text:used.size<3?pick.open:pick.reply};}
+ }
+ const me=c.log[c.log.length-1];me.sc=sc;me.fb=fb;me.ex=ex;c.scores.push(sc);
+ if(next.text)c.log.push(next);save();render();
+}
+async function replyFb(){
+ const c=S.c3,txt=c.reply.trim();const st=$("#reply-status");
+ const local=()=>{const bad=/(自私|白痴|笨|滾|閉嘴|你才|斷你|去死)/.test(txt);const q=/[？?]/.test(txt)||/(資料|查證|來源|監測|報告|事實)/.test(txt);const em=/(理解|我聽到|擔心|可能|也許|一起)/.test(txt);
+  const ok=!bad&&(q||em);return {ok,text:bad?"回應裡有攻擊人的字眼，會讓衝突升高。試著只談事情，不評價人。":ok?"沒有攻擊對方，也把焦點拉回事實或彼此的擔憂。":"可以加上一個查證的問題，或說出你理解對方在擔心什麼。",tip:bad||!ok?"我也希望減碳，但鄰居擔心的是夜間噪音，有沒有夜間監測的資料可以一起看？":""}};
+ if(sample&&claudeState==="on"){st.textContent="Claude 正在閱讀……";
+  try{const r=await sample.json(`${SETTING}
+學生在網路上看到一則攻擊鄰里居民的留言：「${ATTACK.text}」
+學生練習了「暫停、命名情緒（${c.emo.join("、")||"未選"}）、查證、再決定」，寫下回應：「${txt}」
+請判斷這則回應是否「不升高衝突」：不攻擊人、不貼標籤、把焦點放回事實或彼此的擔憂、留空間給不同意見。
+只回覆 JSON：{"ok":true或false,"text":"給高中生的具體回饋，50 字內","tip":"若 ok 為 false，給一句改寫示範（60 字內），否則空字串"}`);
+   c.replyFb={ok:!!r.ok,text:String(r.text||""),tip:String(r.tip||"")};}
+  catch(e){toast(claudeFail(e));c.replyFb=local()}}
+ else c.replyFb=local();
+ save();render();
+}
+async function swapFb(){
+ const c=S.c5,r=roleById(c.swapRole),txt=c.swap.trim();const st=$("#swap-status");
+ const local=()=>{const keys=(r.care+r.fear).match(/[一-龥]{2}/g)||[];const hit=keys.filter(k=>txt.includes(k)).length;const me=/我/.test(txt);
+  const ok=hit>=1&&me&&txt.length>=25;return {ok,text:ok?`你用第一人稱說出了${r.who}在乎的事。下次可以再加一句他「害怕失去」的東西。`:`試著用「我」來說，並提到${r.who}在乎的「${r.care}」或害怕的「${r.fear}」。`}};
+ if(sample&&claudeState==="on"){st.textContent="Claude 正在聆聽……";
+  try{const x=await sample.json(`${SETTING}
+學生在公聽會原本扮演「${roleById(S.c4.role)?.who||"某角色"}」，現在換位扮演意見相反的「${r.who}」（${r.name}；在乎${r.care}；害怕${r.fear}）。學生的 1 分鐘發言：「${txt}」
+請判斷學生是否站在${r.who}的處境、說出他的擔憂，讓原本反對他的人也能理解（依「多數學生換位發言時能說出對方擔憂」這項檢核）。
+只回覆 JSON：{"ok":true或false,"text":"給高中生的具體回饋，60 字內，先肯定再建議"}`);
+   c.swapFb={ok:!!x.ok,text:String(x.text||"")};}
+  catch(e){toast(claudeFail(e));c.swapFb=local()}}
+ else c.swapFb=local();
+ save();render();
+}
+async function procFb(){
+ const c=S.c5;const st=$("#proc-status");
+ const desc=`誰參與：${c.who.join("、")||"未選"}\n何時參與：${c.when.join("、")||"未選"}\n參與方式：${c.how.join("、")||"未選"}\n如何讓弱勢與生態被考量：${c.inclusion||"未填"}\n決策如何回應意見：${c.respond||"未填"}`;
+ const local=()=>{const inc=/(漁民|承租|弱勢|高齡|生態|琵鷺|棲地|翻譯|到府|交通)/.test(c.inclusion)&&c.inclusion.length>=10;
+  const feas=c.when.length>=2&&c.how.length>=2&&c.respond.length>=8;
+  const emp=c.who.length>=4;
+  const law=/(比例|最小侵害|利益衡平|正當程序|資訊公開|說明理由|聽證)/.test(c.inclusion+c.respond)||c.how.includes("聽證會");
+  return {items:[{k:"包容性",ok:inc,t:inc?"有具體機制讓弱勢居民或生態被考量。":"寫出一項具體做法，例如逐戶通知承租漁民、生態調查先於選址。"},
+   {k:"可行性",ok:feas,t:feas?"步驟有標出階段、方式與回應方法。":"至少選兩個參與階段、兩種方式，並寫清楚怎麼回應意見。"},
+   {k:"同理展現",ok:emp,t:emp?"納入多方利害關係人。":"再多納入幾個受影響的群體，例如承租漁民、保育團體。"},
+   {k:"法治連結",ok:law,t:law?"有運用正當程序或比例原則的概念。":"試著寫出你的流程如何做到資訊公開、民眾參與或說明理由。"}]}};
+ if(sample&&claudeState==="on"){st.textContent="Claude 正在檢視流程……";
+  try{const x=await sample.json(`${SETTING}
+一組學生為鹽風里設計了綠能選址參與流程：
+${desc}
+
+請依「參與流程評分規準」逐項評為「優秀」或「待加強」：
+1. 包容性：設計至少一項讓弱勢居民與生態被考量的機制。
+2. 可行性：步驟具體，標明參與者、時間與方式。
+3. 同理展現：呈現多方利害關係人的需求。
+4. 法治連結：正確運用比例原則或正當程序。
+每項給一句具體回饋（45 字內，對高中生說話，待加強時給可行的修改建議）。
+只回覆 JSON：{"items":[{"k":"包容性","ok":true,"t":"…"},{"k":"可行性","ok":false,"t":"…"},{"k":"同理展現","ok":true,"t":"…"},{"k":"法治連結","ok":true,"t":"…"}]}`);
+   if(Array.isArray(x.items)&&x.items.length)c.procFb={items:x.items.slice(0,4).map(i=>({k:String(i.k),ok:!!i.ok,t:String(i.t||"")}))};else c.procFb=local();}
+  catch(e){toast(claudeFail(e));c.procFb=local()}}
+ else c.procFb=local();
+ save();render();
+}
+
+/* ============ EVENTS ============ */
+function setPath(path,val){const [a,b]=path.split(".");if(b)S[a][b]=val;else S[a]=val}
+function getPath(path){const [a,b]=path.split(".");return b?S[a][b]:S[a]}
+document.addEventListener("input",e=>{
+ const el=e.target;const p=el.dataset.bind;if(!p)return;
+ setPath(p,el.dataset.num?+el.value:el.value);save();
+ if(el.type==="range"){const b=el.parentElement.querySelector("b");if(b)b.textContent=el.value}
+ if(p==="name"||p==="seat"){const h=document.querySelector(".top");if(h)h.outerHTML=header()}
+ if(["c3.reply","c5.swap"].includes(p)){const btn=el.closest(".stack").querySelector('[data-act="replyfb"],[data-act="swapfb"]');if(btn)btn.disabled=el.value.trim().length<(p==="c3.reply"?8:10)}
+});
+document.addEventListener("change",e=>{
+ const el=e.target,a=el.dataset.act;
+ if(a==="match"){S.c1.match[el.dataset.k]=el.value;save();render()}
+ if(a==="rep"){const i=+el.dataset.i;const arr=S.c3.rep;const k=arr.indexOf(i);if(k>=0)arr.splice(k,1);else arr.push(i);save();render()}
+ if(a==="arrcb"){const arr=getPath(el.dataset.k);const w=el.dataset.w;const k=arr.indexOf(w);if(k>=0)arr.splice(k,1);else arr.push(w);save();render()}
+});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches(".parcel")){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))}});
+document.addEventListener("click",async e=>{
+ const el=e.target.closest("[data-act]");if(!el||el.tagName==="SELECT"||el.type==="checkbox")return;
+ const a=el.dataset.act,ch=+S.view;
+ const go=()=>{save();render()};
+ switch(a){
+  case "home":S.view="home";go();scrollTo(0,0);break;
+  case "open":S.view=el.dataset.ch;go();scrollTo(0,0);break;
+  case "step":S.step[ch]=+el.dataset.i;go();break;
+  case "next":S.step[ch]++;go();scrollTo(0,0);break;
+  case "prev":S.step[ch]--;go();scrollTo(0,0);break;
+  case "finish":if(+el.dataset.ch===5&&!S.post.every(x=>x>0)){toast("先完成 SEL 後測");break}markDone(+el.dataset.ch);S.view="home";go();scrollTo(0,0);toast("完成第"+el.dataset.ch+"關");break;
+  case "reset":if(el.dataset.confirm){S=blank();try{localStorage.removeItem(KEY)}catch(_){ }go();toast("已清除")}else{el.dataset.confirm="1";el.textContent="再按一次確認清除";setTimeout(()=>{if(el.isConnected){delete el.dataset.confirm;el.textContent="清除紀錄重新開始"}},3000)}break;
+  case "sel":S[el.dataset.k][+el.dataset.i]=+el.dataset.v;go();break;
+  case "vote":S.c1[el.dataset.k]=+el.dataset.v;go();break;
+  case "emo":{const arr=S.c1[el.dataset.k];const w=el.dataset.w;const i=arr.indexOf(w);if(i>=0)arr.splice(i,1);else if(arr.length<3)arr.push(w);else toast("最多選 3 個");go();break}
+  case "snap":{const arr=S.c3.snapEmo;const w=el.dataset.w;const i=arr.indexOf(w);if(i>=0)arr.splice(i,1);else if(arr.length<3)arr.push(w);go();break}
+  case "arr":{const arr=getPath(el.dataset.k);const w=el.dataset.w;const i=arr.indexOf(w);if(i>=0)arr.splice(i,1);else arr.push(w);go();break}
+  case "scene":S.c1.scene=el.dataset.v;go();break;
+  case "set":setPath(el.dataset.k,el.dataset.v);if(el.dataset.k==="c5.swapRole")S.c5.swapFb=null;go();break;
+  case "tb":S.c2.tb[el.dataset.i]=+el.dataset.v;go();break;
+  case "bal":S.c2.bal[el.dataset.k]=el.dataset.v;go();break;
+  case "balcheck":S.c2.balChecked=true;go();break;
+  case "lab":S.c3.lab[el.dataset.k]=el.dataset.v;go();break;
+  case "matchcheck":S.c1.matchChecked=true;go();break;
+  case "labcheck":S.c3.labChecked=true;go();break;
+  case "repcheck":S.c3.repChecked=true;go();break;
+  case "role":if(S.c4.role!==el.dataset.v){S.c4.role=el.dataset.v;S.c4.log=[];S.c4.scores=[];S.c4.round=0}go();break;
+  case "speak":el.disabled=true;await speak();break;
+  case "walk":S.c4.walk++;go();break;
+  case "ctl":S.c5.ctl[el.dataset.i]=el.dataset.v;go();break;
+  case "hq":S.c5.hq[el.dataset.i]=+el.dataset.v;go();break;
+  case "replyfb":el.disabled=true;await replyFb();break;
+  case "swapfb":el.disabled=true;await swapFb();break;
+  case "procfb":el.disabled=true;await procFb();break;
+  case "breathe":{const b=$("#breath");if(!b)break;el.disabled=true;let n=0;const tick=()=>{if(!b.isConnected)return;if(n>=6){b.textContent="出戲了";b.classList.remove("in");el.disabled=false;return}const inh=n%2===0;b.classList.toggle("in",inh);b.textContent=inh?"吸氣":"吐氣";n++;setTimeout(tick,4000)};tick();break}
+  case "copy":{const t=recordText();try{await navigator.clipboard.writeText(t);toast("已複製學習紀錄")}catch(_){const r=document.createRange();r.selectNodeContents($("#record"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("已選取文字，請按複製")}break}
+ }
+});
+render();
+</script>
+
+</body></html>
