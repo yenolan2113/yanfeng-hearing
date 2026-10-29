@@ -370,17 +370,19 @@ const CH=[
 
 /* ============ STATE ============ */
 const KEY="yanfeng-hearing-v1";
+const T0=()=>({feel:"",feelInt:3,believe:"",stance:"",src:""});
 const blank=()=>({name:"",seat:"",pre:Array(10).fill(0),post:Array(10).fill(0),view:"home",step:{1:0,2:0,3:0,4:0,5:0},done:{},
  c1:{v1:-1,v2:-1,e1:[],e2:[],change:"",match:{},scene:"",inner:"",feel:"",feelInt:3,believe:"",stance:"",src:""},
  c2:{s1:"",s2:"",i1:3,i2:3,i2b:3,tb:{},bal:{},balChecked:false,ask:"",exit:"",same:"",diff:""},
- c3:{snapEmo:[],snapInt:3,lab:{},labChecked:false,rep:[],repChecked:false,emo:[],lean:"",ver:[],action:"",reply:"",replyFb:null,safe:[],strategy:""},
+ c3:{snapEmo:[],snapInt:3,b1:{},b2:{},lab:{},labChecked:false,rep:[],repChecked:false,emo:[],lean:"",ver:[],action:"",reply:"",replyFb:null,safe:[],strategy:""},
  c4:{role:"",care:"",fear:"",draft:"",log:[],scores:[],round:0,walk:0,decision:"",cold:"",touch:"",moved:"",mayorFeel:"",hurt:"",moment:"",split:"",meta:"",metaFb:null},
+ t2:T0(),t3:T0(),t4:T0(),t5:T0(),
  c5:{swapRole:"",swap:"",swapFb:null,crab:[],ctl:{},hq:{},who:[],when:[],how:[],reg:[],inclusion:"",respond:"",procFb:null,traj:"",trajSrc:""}
 });
 let S;
 try{S=Object.assign(blank(),JSON.parse(localStorage.getItem(KEY)||"null")||{})}catch(e){S=blank()}
 /* 舊版紀錄相容：補上新欄位；SEL 題目已改為 10 題，舊的 8 題作答需重填 */
-(function migrate(){const b=blank();["c1","c2","c3","c4","c5","step"].forEach(k=>{S[k]=Object.assign(b[k],S[k]||{})});
+(function migrate(){const b=blank();["c1","c2","c3","c4","c5","t2","t3","t4","t5","step"].forEach(k=>{S[k]=Object.assign(b[k],S[k]||{})});
  ["pre","post"].forEach(k=>{if(!Array.isArray(S[k])||S[k].length!==SEL.length)S[k]=Array(SEL.length).fill(0)});})();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
@@ -565,6 +567,19 @@ function chapter(id){
  ${last?`<button class="primary" data-act="finish" data-ch="${id}">${id===5?"完成全部關卡":"完成本關，回地圖"}</button>`:`<button class="primary" data-act="next">下一步 →</button>`}</div>`;
 }
 
+/* ---------- 情緒—認知—立場追蹤單（每節共用） ---------- */
+function trkObj(n){return n===1?S.c1:S["t"+n]}
+function tracker(n){const t=trkObj(n),k=n===1?"c1":"t"+n,p=n>1?trkObj(n-1):null;
+ return `<div class="case"><span class="tag">情緒—認知—立場追蹤單 · 第${n}節</span>
+ ${p?`<p class="muted" style="font-size:14px">上一節的你：感到「${esc(p.feel||"–")}」（${p.feelInt}）／相信「${esc(p.believe||"–")}」／主張「${esc(p.stance||"–")}」。這一節，哪一欄變了？</p>`:""}
+ <label class="f">我感到<small>情緒詞＋原因</small><textarea id="${k}-feel" data-bind="${k}.feel">${esc(t.feel)}</textarea></label>
+ <label class="f" style="font-weight:400"><span>感受強度：<b class="mono">${t.feelInt}</b> / 5</span><input type="range" min="1" max="5" id="${k}-fi" data-bind="${k}.feelInt" data-num="1" value="${t.feelInt}"></label>
+ <label class="f">我相信<small>對事實的判斷</small><textarea id="${k}-bel" data-bind="${k}.believe">${esc(t.believe)}</textarea></label>
+ <label class="f">我主張<small>你現在的立場</small><textarea id="${k}-st" data-bind="${k}.stance">${esc(t.stance)}</textarea></label>
+ <p class="q">這一節，影響我最多的是？</p><div class="seg lbl" style="flex-wrap:wrap">${SOURCES.map(v=>`<button data-act="set" data-k="${k}.src" data-v="${v}" ${pressed(t.src===v)}>${v}</button>`).join("")}</div></div>`}
+function beliefStats(){const c=S.c3,ids=POSTS.filter(p=>p.ans!=="合理擔憂").map(p=>p.id).filter(id=>c.b1[id]!=null&&c.b2[id]!=null);
+ if(!ids.length)return null;const m=o=>+(ids.reduce((s,id)=>s+o[id],0)/ids.length).toFixed(1);return {n:ids.length,before:m(c.b1),after:m(c.b2)}}
+
 /* ---------- CHAPTER 1 ---------- */
 function emoPicker(key){
  const sel=S.c1[key]||[];
@@ -648,7 +663,7 @@ function ch2(st){
   <label class="f" style="font-weight:400"><span>現在的感受強度：<b class="mono">${c.i2b}</b> / 5</span><input type="range" min="1" max="5" id="c2-i2b" data-bind="c2.i2b" data-num="1" value="${c.i2b}"></label></div>
   <label class="f">出口卡：為什麼「程序」會影響人們的情緒？<small>提示：覺得被聽見、被說明理由時，即使結果不變，憤怒也可能降低。這就是「認知改變情緒」。</small><textarea id="c2-exit" data-bind="c2.exit">${esc(c.exit)}</textarea></label>
   <div class="case"><span class="tag s">國際對照</span><h3>德國呂策拉特村（Lützerath）</h3><p>為了擴大露天褐煤礦，村民自 2006 年起陸續遷離。政府與能源公司協議把當地燃煤退場提前到 2030 年，並保留其他村莊，但呂策拉特仍在 2023 年初被清空拆除。化石能源和綠能一樣，都需要土地。</p></div>
-  <div class="grid2"><label class="f">和台灣綠能案例的一個相同點<textarea id="c2-same" data-bind="c2.same">${esc(c.same)}</textarea></label><label class="f">一個不同點<textarea id="c2-diff" data-bind="c2.diff">${esc(c.diff)}</textarea></label></div></div>`;
+  <div class="grid2"><label class="f">和台灣綠能案例的一個相同點<textarea id="c2-same" data-bind="c2.same">${esc(c.same)}</textarea></label><label class="f">一個不同點<textarea id="c2-diff" data-bind="c2.diff">${esc(c.diff)}</textarea></label></div>${tracker(2)}</div>`;
 }
 
 /* ---------- CHAPTER 3 ---------- */
@@ -697,8 +712,10 @@ function ch3(st){
   const feed=POSTS.map(p=>{const v=c.lab[p.id];const ok=v===p.ans;
    return `<article class="post"><div class="who"><span class="avatar" style="background:${p.ans==="合理擔憂"?"var(--pond)":"var(--muted)"}">${p.av}</span><div><b>${p.user}</b><div class="meta">${p.time}</div></div><span class="sim">模擬貼文</span></div>
    <div class="body">${p.body}</div>${p.img?fakeImg():""}<div class="react">${p.react}</div>
+   ${st===0?`<label class="f" style="font-weight:400;font-size:14px"><span>第一眼相信程度：<b class="mono">${c.b1[p.id]??"–"}</b> / 10</span><input type="range" min="0" max="10" id="b1-${p.id}" data-bind="c3.b1.${p.id}" data-num="1" value="${c.b1[p.id]??5}"></label>`:""}
+   ${st===1&&c.labChecked?`<label class="f" style="font-weight:400;font-size:14px"><span>查證後相信程度：<b class="mono">${c.b2[p.id]??"–"}</b> / 10（第一眼 ${c.b1[p.id]??"–"}）</span><input type="range" min="0" max="10" id="b2-${p.id}" data-bind="c3.b2.${p.id}" data-num="1" value="${c.b2[p.id]??c.b1[p.id]??5}"></label>`:""}
    ${showLab?`<div class="seg lbl" role="group" aria-label="判斷" style="flex-wrap:wrap">${LABELS.map(l=>`<button data-act="lab" data-k="${p.id}" data-v="${l}" ${pressed(v===l)}>${l}</button>`).join("")}</div>${c.labChecked&&v?`<div class="fb ${ok?"good":"warn"}"><b>${ok?"判斷正確":"參考判斷："+p.ans}。</b>${p.why}</div>`:""}`:""}</article>`}).join("");
-  if(st===0)return `<div class="stack"><span class="eyebrow">情緒快照 · 2 分鐘</span><h3>快速滑過這些貼文，記下第一眼的感受</h3><p class="muted">這些貼文和帳號都是為了課堂自製的，沒有使用真實個資。</p>
+  if(st===0)return `<div class="stack"><span class="eyebrow">情緒快照 · 2 分鐘</span><h3>快速滑過這些貼文，記下第一眼的感受</h3><p class="muted">這些貼文和帳號都是為了課堂自製的，沒有使用真實個資。每則貼文下方，拉一下你「第一眼有多相信」（0–10）。</p>
    <div class="grid2" style="align-items:start"><div class="feed">${feed}</div><div class="stack" style="position:sticky;top:12px">
    <p class="q">看完的第一個情緒是？（最多 3 個）</p><div class="row" style="gap:6px">${[...EMO_NEG.slice(0,8),"好奇","懷疑","平靜"].map(w=>`<button class="chip" data-act="snap" data-w="${w}" ${pressed(c.snapEmo.includes(w))}>${w}</button>`).join("")}</div>
    <label class="f" style="font-weight:400"><span>情緒強度：<b class="mono">${c.snapInt}</b> / 5</span><input type="range" min="1" max="5" id="c3-int" data-bind="c3.snapInt" data-num="1" value="${c.snapInt}"></label>
@@ -708,6 +725,7 @@ function ch3(st){
   <div class="case"><b>貼文檢核表</b><ul>${CHECKS.map(x=>`<li>${x}</li>`).join("")}</ul></div>
   <div class="feed">${feed}</div>
   <div class="row"><button class="primary" data-act="labcheck" ${n<POSTS.length?"disabled":""}>揭曉答案</button>${c.labChecked?`<span class="mono">判斷正確 ${score} / ${POSTS.length}</span>`:`<span class="muted" style="font-size:14px">已判斷 ${n} / ${POSTS.length}</span>`}</div>
+  ${c.labChecked?`<div class="note">揭曉答案後，在每則貼文下方再標一次「查證後相信程度」。${(()=>{const b=beliefStats();return b?`你對 ${b.n} 則非合理擔憂貼文的平均相信度：第一眼 ${b.before} → 查證後 ${b.after}。你的情緒強度是 ${c.snapInt} / 5，情緒越強時，第一眼是不是越容易相信？`:""})()}</div>`:""}
   ${c.labChecked?`<div class="note pond">合理擔憂（例如噪音、生態）值得被認真回應；把它們和謠言混在一起貼上「反綠能」標籤，當事人會覺得委屈、不被聽見。</div>`:""}</div>`;
  }
  if(st===2){
@@ -742,7 +760,7 @@ function ch3(st){
  return `<div class="stack"><span class="eyebrow">總結活動 · 策略卡</span><h3>遭遇網路攻擊時，我會怎麼保護自己？</h3>
   <div class="row" style="gap:6px">${SAFE.map(w=>`<button class="chip" data-act="arr" data-k="c3.safe" data-w="${w}" ${pressed(c.safe.includes(w))}>${w}</button>`).join("")}</div>
   <label class="f">寫下一個你真的會用的自我保護策略<textarea id="c3-strategy" data-bind="c3.strategy" placeholder="當我看到……，我會……">${esc(c.strategy)}</textarea></label>
-  <div class="note pond">預告：下一節是戲劇公聽會，你會抽到一個角色。</div></div>`;
+  ${tracker(3)}<div class="note pond">預告：下一節是戲劇公聽會，你會抽到一個角色。</div></div>`;
 }
 
 /* ---------- CHAPTER 4 ---------- */
@@ -803,7 +821,7 @@ function ch4(st){
   <label class="f">後設覺察：今天的情緒，怎麼影響了你的立場或判斷？<small>試著說出：哪個情緒、影響了哪一欄（感受／相信／主張），你是被感動還是被說服。</small><textarea id="c4-meta" data-bind="c4.meta">${esc(c.meta)}</textarea></label>
   <div class="row"><button data-act="metafb" ${c.meta.trim().length<10?"disabled":""}>${claudeState==="on"?"請 Claude 依規準評後設覺察":"依規準檢核後設覺察"}</button><span id="meta-status" class="thinking"></span></div>
   ${c.metaFb?`<div class="fb ${c.metaFb.score>=3?"good":"warn"}"><b>後設覺察 ${c.metaFb.score} / 4。</b>${esc(c.metaFb.text)}</div>`:""}
-  <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div></div>`;
+  <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div>${tracker(4)}</div>`;
 }
 
 /* ---------- CHAPTER 5 ---------- */
@@ -849,7 +867,8 @@ function ch5(st){
   <div class="note pond">關鍵提問：你的流程如何避免決策被一時的情緒渲染主導，又不忽略居民真實的擔憂？課堂上請把流程畫成海報，各組 1 分鐘發表。</div></div>`;
  }
  const postDone=S.post.every(x=>x>0);const c1=S.c1;
- const traj=`<div class="case"><b>我的變化軌跡</b><p class="muted" style="font-size:14px">第一關的你：感到「${esc(c1.feel||"–")}」（強度 ${c1.feelInt}）；相信「${esc(c1.believe||"–")}」；主張「${esc(c1.stance||"–")}」。</p>
+ const rows=[1,2,3,4,5].map(n=>{const t=trkObj(n);return `<tr><td class="mono">${n}</td><td>${esc(t.feel||"–")}（${t.feelInt}）</td><td>${esc(t.believe||"–")}</td><td>${esc(t.stance||"–")}</td><td>${esc(t.src||"–")}</td></tr>`}).join("");
+ const traj=`${tracker(5)}<div class="case"><b>我的變化軌跡</b><div class="tablewrap"><table class="matrix"><thead><tr><th>節</th><th>我感到（強度）</th><th>我相信</th><th>我主張</th><th>影響最多</th></tr></thead><tbody>${rows}</tbody></table></div>
   <p class="q">走完五個地號，我的立場：</p><div class="seg lbl">${["有改變","沒有改變"].map(v=>`<button data-act="set" data-k="c5.traj" data-v="${v}" ${pressed(c.traj===v)}>${v}</button>`).join("")}</div>
   ${c.traj?`<p class="q">主要因為：</p><div class="seg lbl" style="flex-wrap:wrap">${SOURCES.map(v=>`<button data-act="set" data-k="c5.trajSrc" data-v="${v}" ${pressed(c.trajSrc===v)}>${v}</button>`).join("")}</div>`:""}</div>`;
  return `<div class="stack">${traj}<span class="eyebrow">SEL 後測 · 反思</span><h3>回到出發時的 ${SEL.length} 個問題</h3>${selForm("post")}${postDone?certificate():`<p class="muted">完成 ${SEL.length} 題後測，就會看到你的成果卡。</p>`}</div>`;
@@ -870,6 +889,8 @@ function recordText(){
  `第一關 投票：${SCALE[c1.v1]||"–"} → ${SCALE[c1.v2]||"–"}；情緒：${c1.e1.join("、")||"–"} → ${c1.e2.join("、")||"–"}`,
  `第一關 三欄：我感到 ${c1.feel||"–"}（強度 ${c1.feelInt}）／我相信 ${c1.believe||"–"}／我主張 ${c1.stance||"–"}；影響最多：${c1.src||"–"}`,
  `第二關 情境二感受強度：${S.c2.i2} → ${S.c2.i2b}`,
+ ...[2,3,4,5].map(n=>{const t=trkObj(n);return `第${n}節 三欄：我感到 ${t.feel||"–"}（強度 ${t.feelInt}）／我相信 ${t.believe||"–"}／我主張 ${t.stance||"–"}；影響最多：${t.src||"–"}`}),
+ `第三關 非合理擔憂貼文平均相信度：${(()=>{const b=beliefStats();return b?`第一眼 ${b.before} → 查證後 ${b.after}（${b.n} 則；情緒強度 ${S.c3.snapInt}）`:"–"})()}`,
  `第二關 公益衡量判斷表與參考判斷一致：${s.bal} / 7`,
  `第三關 貼文辨識正確：${s.lab} / 6；情緒讓我想相信：${S.c3.lean||"–"}；自保策略：${S.c3.strategy||"–"}`,
  `第四關 角色：${roleById(c4.role)?.who||"–"}；發言平均 立場 ${s.stance}／情緒 ${s.emotion}／同理 ${s.empathy}`,
@@ -1030,8 +1051,8 @@ ${desc}
 }
 
 /* ============ EVENTS ============ */
-function setPath(path,val){const [a,b]=path.split(".");if(b)S[a][b]=val;else S[a]=val}
-function getPath(path){const [a,b]=path.split(".");return b?S[a][b]:S[a]}
+function setPath(path,val){const k=path.split(".");let o=S;for(let i=0;i<k.length-1;i++){if(o[k[i]]==null)o[k[i]]={};o=o[k[i]]}o[k[k.length-1]]=val}
+function getPath(path){return path.split(".").reduce((o,k)=>o==null?o:o[k],S)}
 document.addEventListener("input",e=>{
  const el=e.target;const p=el.dataset.bind;if(!p)return;
  setPath(p,el.dataset.num?+el.value:el.value);save();
