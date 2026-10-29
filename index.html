@@ -890,7 +890,7 @@ function recordText(){
  `第一關 投票：${SCALE[c1.v1]||"–"} → ${SCALE[c1.v2]||"–"}；情緒：${c1.e1.join("、")||"–"} → ${c1.e2.join("、")||"–"}`,
  `第一關 三欄：我感到 ${c1.feel||"–"}（強度 ${c1.feelInt}）／我相信 ${c1.believe||"–"}／我主張 ${c1.stance||"–"}；影響最多：${c1.src||"–"}`,
  `第二關 情境二感受強度：${S.c2.i2} → ${S.c2.i2b}`,
- ...[2,3,4,5].map(n=>{const t=trkObj(n);return `第${n}節 三欄：我感到 ${t.feel||"–"}（強度 ${t.feelInt}）／我相信 ${t.believe||"–"}／我主張 ${t.stance||"–"}；影響最多：${t.src||"–"}`}),
+ ...[2,3,4,5].map(n=>{const t=trkObj(n);return `第${n}關 三欄：我感到 ${t.feel||"–"}（強度 ${t.feelInt}）／我相信 ${t.believe||"–"}／我主張 ${t.stance||"–"}；影響最多：${t.src||"–"}`}),
  `第三關 非合理擔憂貼文平均相信度：${(()=>{const b=beliefStats();return b?`第一眼 ${b.before} → 查證後 ${b.after}（${b.n} 則；情緒強度 ${S.c3.snapInt}）`:"–"})()}`,
  `第二關 公益衡量判斷表與參考判斷一致：${s.bal} / 7`,
  `第三關 貼文辨識正確：${s.lab} / 6；情緒讓我想相信：${S.c3.lean||"–"}；自保策略：${S.c3.strategy||"–"}`,
