@@ -216,15 +216,19 @@ const EMO_POS=["期待","安心","驕傲","希望","好奇","感激","平靜","�
 const EMO_NEG=["擔心","焦慮","生氣","無力","委屈","矛盾","害怕","不安","失望","挫折","煩躁","被忽視","懷疑","難過","內疚"];
 const SCALE=["非常反對","有點反對","不確定","有點支持","非常支持"];
 const SEL=[
- ["情緒辨識","我能說出自己面對爭議時的感受。"],
- ["情緒辨識","我能分辨自己的情緒和立場。"],
- ["觀點取替","我能說出和我意見不同的人在乎什麼。"],
- ["觀點取替","我願意聽完不同意見再回應。"],
- ["自我調節","看到激動的貼文時，我會先停下來再回應。"],
- ["自我調節","我知道遭遇網路攻擊時如何保護自己。"],
- ["責任決策","我能提出兼顧不同立場的做法。"],
- ["責任決策","面對氣候變遷等無法立即改變的事，我知道自己還能做什麼。"]
+ ["自我覺察","我能說出自己面對爭議時的感受。"],
+ ["自我覺察","我能分辨自己的情緒、對事實的判斷與立場。"],
+ ["自我管理","看到激動的貼文時，我會先停下來再回應。"],
+ ["自我管理","我知道遭遇網路攻擊時如何保護自己。"],
+ ["社會覺察","我能說出和我意見不同的人在乎什麼。"],
+ ["社會覺察","我能察覺網路或群體的情緒正在影響我的想法。"],
+ ["人際技巧","我願意聽完不同意見再回應。"],
+ ["人際技巧","我能用「我訊息」說出感受與需求，而不指責他人。"],
+ ["負責任決策","我能分辨自己改變想法是因為新的理由，還是當下的感受。"],
+ ["負責任決策","面對氣候變遷等無法立即改變的事，我知道自己還能做什麼。"]
 ];
+const SOURCES=["自己的感受","別人的情緒","理由與證據"];
+const REGS=["公告期與冷靜期","資訊公開與白話說明","結構化發言順序","逐條回應意見","第三方監測與數據公開"];
 const ROLES=[
  {id:"fisher",name:"承租魚塭的漁民",who:"漁民 阿興",care:"能繼續養魚、維持一家生計",fear:"租約被終止，失去做了二十年的工作",
   open:"我租這片魚塭養了二十年虱目魚。地主要把地租給光電業者，租約一到期，我就沒地方養了。我不反對綠能，但從頭到尾有誰來問過我們這些承租的人？",
@@ -357,24 +361,27 @@ const STAGES=["選址規劃前","環評審查時","核准決定前","施工期�
 const METHODS=["說明會","公聽會","聽證會","社區工作坊","線上意見平臺","逐戶訪談","生態調查公開"];
 
 const CH=[
- {id:1,lot:"鹽風段 101",title:"我支持綠能，但……",verb:"覺察",goal:"C-4",steps:["第一次投票","第二次投票","拼圖閱讀","定格畫面","我的情緒與立場"]},
- {id:2,lot:"鹽風段 102",title:"法律工具箱",verb:"理解",goal:"C-1、C-2",steps:["我的土地我作主？","工具箱","公益衡量判斷表","追問與出口卡"]},
- {id:3,lot:"鹽風段 103",title:"綠能謠言與網路風暴",verb:"辨識",goal:"C-3、C-6",steps:["情緒快照","辨識操弄","誰提供的數據","停一下再回應","自保策略"]},
- {id:4,lot:"鹽風段 104",title:"戲劇公聽會",verb:"對話",goal:"C-5、C-7",steps:["角色情緒卡","公聽會","良心巷","出戲"]},
- {id:5,lot:"鹽風段 105",title:"換位、韌性與行動",verb:"行動",goal:"C-6、C-8",steps:["轉換立場","抱卵母蟹案","能／不能控制","三種會議","設計參與流程","SEL 後測與成果"]}
+ {id:1,lot:"鹽風段 101",title:"我支持綠能，但……",verb:"覺察",goal:"C-2、C-4",steps:["第一次投票","第二次投票","拼圖閱讀","定格畫面","三欄追蹤"]},
+ {id:2,lot:"鹽風段 102",title:"法律工具箱",verb:"理解",goal:"C-1、C-2、C-6",steps:["我的土地我作主？","工具箱","公益衡量判斷表","追問與出口卡"]},
+ {id:3,lot:"鹽風段 103",title:"綠能謠言與網路風暴",verb:"辨識",goal:"C-3、C-4、C-6",steps:["情緒快照","辨識操弄","誰提供的數據","停一下再回應","自保策略"]},
+ {id:4,lot:"鹽風段 104",title:"戲劇公聽會",verb:"對話",goal:"C-4、C-5、C-6、C-7",steps:["角色情緒卡","公聽會","良心巷","出戲"]},
+ {id:5,lot:"鹽風段 105",title:"換位、韌性與行動",verb:"行動",goal:"C-5、C-6、C-8",steps:["轉換立場","抱卵母蟹案","能／不能控制","三種會議","設計參與流程","SEL 後測與成果"]}
 ];
 
 /* ============ STATE ============ */
 const KEY="yanfeng-hearing-v1";
-const blank=()=>({name:"",seat:"",pre:Array(8).fill(0),post:Array(8).fill(0),view:"home",step:{1:0,2:0,3:0,4:0,5:0},done:{},
- c1:{v1:-1,v2:-1,e1:[],e2:[],change:"",match:{},scene:"",inner:"",feel:"",stance:""},
- c2:{s1:"",s2:"",i1:3,i2:3,tb:{},bal:{},balChecked:false,ask:"",exit:"",same:"",diff:""},
- c3:{snapEmo:[],snapInt:3,lab:{},labChecked:false,rep:[],repChecked:false,emo:[],ver:[],action:"",reply:"",replyFb:null,safe:[],strategy:""},
- c4:{role:"",care:"",fear:"",draft:"",log:[],scores:[],round:0,walk:0,decision:"",mayorFeel:"",hurt:"",moment:"",split:""},
- c5:{swapRole:"",swap:"",swapFb:null,crab:[],ctl:{},hq:{},who:[],when:[],how:[],inclusion:"",respond:"",procFb:null}
+const blank=()=>({name:"",seat:"",pre:Array(10).fill(0),post:Array(10).fill(0),view:"home",step:{1:0,2:0,3:0,4:0,5:0},done:{},
+ c1:{v1:-1,v2:-1,e1:[],e2:[],change:"",match:{},scene:"",inner:"",feel:"",feelInt:3,believe:"",stance:"",src:""},
+ c2:{s1:"",s2:"",i1:3,i2:3,i2b:3,tb:{},bal:{},balChecked:false,ask:"",exit:"",same:"",diff:""},
+ c3:{snapEmo:[],snapInt:3,lab:{},labChecked:false,rep:[],repChecked:false,emo:[],lean:"",ver:[],action:"",reply:"",replyFb:null,safe:[],strategy:""},
+ c4:{role:"",care:"",fear:"",draft:"",log:[],scores:[],round:0,walk:0,decision:"",cold:"",touch:"",moved:"",mayorFeel:"",hurt:"",moment:"",split:"",meta:"",metaFb:null},
+ c5:{swapRole:"",swap:"",swapFb:null,crab:[],ctl:{},hq:{},who:[],when:[],how:[],reg:[],inclusion:"",respond:"",procFb:null,traj:"",trajSrc:""}
 });
 let S;
 try{S=Object.assign(blank(),JSON.parse(localStorage.getItem(KEY)||"null")||{})}catch(e){S=blank()}
+/* 舊版紀錄相容：補上新欄位；SEL 題目已改為 10 題，舊的 8 題作答需重填 */
+(function migrate(){const b=blank();["c1","c2","c3","c4","c5","step"].forEach(k=>{S[k]=Object.assign(b[k],S[k]||{})});
+ ["pre","post"].forEach(k=>{if(!Array.isArray(S[k])||S[k].length!==SEL.length)S[k]=Array(SEL.length).fill(0)});})();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
 /* ============ CLAUDE ============ */
@@ -540,7 +547,7 @@ function home(){
  <label class="f">座號<input type="text" id="f-seat" data-bind="seat" value="${esc(S.seat)}" placeholder="例如：17"></label></div>
  <p class="muted" style="font-size:14px">依你現在的狀況選 1–5（1 = 非常不同意，5 = 非常同意）。這份前測會在第五關和後測比較。</p>
  ${selForm("pre")}
- <div class="row"><button class="primary" data-act="open" data-ch="${n>=5?5:(CH.find(c=>!S.done[c.id])||CH[0]).id}" ${preDone?"":"disabled"}>${n?"繼續闖關":"開始第一關"}</button>${preDone?"":'<span class="muted" style="font-size:14px">完成 8 題前測後開始</span>'}
+ <div class="row"><button class="primary" data-act="open" data-ch="${n>=5?5:(CH.find(c=>!S.done[c.id])||CH[0]).id}" ${preDone?"":"disabled"}>${n?"繼續闖關":"開始第一關"}</button>${preDone?"":'<span class="muted" style="font-size:14px">完成 ${SEL.length} 題前測後開始</span>'}
  <button class="ghost" data-act="reset" style="margin-left:auto">清除紀錄重新開始</button></div>
  </div></section>`;
 }
@@ -592,10 +599,16 @@ function ch1(st){
   ${c.scene?`<label class="f">老師拍拍你的肩膀：「你現在心裡在想什麼？」<small>用第一人稱寫 2–3 句，說出角色的擔心或期待。不想上台的同學，老師會代為朗讀。</small><textarea id="c1-inner" data-bind="c1.inner" placeholder="我……">${esc(c.inner)}</textarea></label>
   <div class="note pond">關鍵提問：苑裡居民說「不反綠能，只反不當選址」，你同意嗎？想好答案，帶到下一步。</div>`:""}</div>`;
  }
- return `<div class="stack"><span class="eyebrow">總結活動</span><h3>把「情緒」和「立場」分開寫</h3>
-  <label class="f">我的情緒<small>例如：我感到矛盾，因為我想減碳，也想睡得好。</small><textarea id="c1-feel" data-bind="c1.feel">${esc(c.feel)}</textarea></label>
-  <label class="f">我目前的立場<small>例如：我支持綠能，但風機應該離住家更遠。</small><textarea id="c1-stance" data-bind="c1.stance">${esc(c.stance)}</textarea></label>
-  <p class="muted">兩兩討論：你的情緒怎麼影響了你的立場？</p>
+ return `<div class="stack"><span class="eyebrow">總結活動 · 情緒—認知—立場追蹤單</span><h3>把「感受」「判斷」「立場」分開寫</h3>
+  <div class="note pond">先想一想：兩次投票之間，你得到新的資訊了嗎？如果沒有，是什麼讓答案改變？</div>
+  <label class="f">我感到<small>情緒詞＋原因，例如：我感到矛盾，因為我想減碳，也想睡得好。</small><textarea id="c1-feel" data-bind="c1.feel">${esc(c.feel)}</textarea></label>
+  <label class="f" style="font-weight:400"><span>感受強度：<b class="mono">${c.feelInt}</b> / 5</span><input type="range" min="1" max="5" id="c1-fi" data-bind="c1.feelInt" data-num="1" value="${c.feelInt}"></label>
+  <label class="f">我相信<small>你對事實的判斷，例如：我相信風機的噪音在晚上會比較明顯。</small><textarea id="c1-believe" data-bind="c1.believe">${esc(c.believe)}</textarea></label>
+  <label class="f">我主張<small>你的立場，例如：我支持綠能，但風機應該離住家更遠。</small><textarea id="c1-stance" data-bind="c1.stance">${esc(c.stance)}</textarea></label>
+  <p class="q">這一次，影響我的立場最多的是？</p>
+  <div class="seg lbl" role="group" style="flex-wrap:wrap">${SOURCES.map(v=>`<button data-act="set" data-k="c1.src" data-v="${v}" ${pressed(c.src===v)}>${v}</button>`).join("")}</div>
+  ${c.src?`<div class="note">${c.src==="理由與證據"?"兩次投票之間，題目只是把設施移到你家旁邊，並沒有新的證據。再想想：真正推動你改變的，會不會是切身的感受？":"事實沒有改變，改變的是切身感受，這就是「情緒影響立場」。這份情緒不是錯的：距離帶來的擔憂是正當的訊號，重點是看清它影響了哪一欄。"}</div>`:""}
+  <p class="muted">兩兩討論：你的情緒怎麼影響了你的立場？之後每一關結束，都回來看看三欄有沒有改變。</p>
   <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div>
   <div class="note">課後任務：訪談一位家人——「如果家附近要設置綠能設施，你的感受與考量是什麼？」下一節分享。</div></div>`;
 }
@@ -605,7 +618,7 @@ function ch2(st){
  const c=S.c2;
  if(st===0){
   const sc=(k,title,desc,ik)=>`<div class="case"><h3>${title}</h3><p>${desc}</p><div class="seg lbl" role="group">${["可以","有條件可以","不可以"].map(v=>`<button data-act="set" data-k="c2.${k}" data-v="${v}" ${pressed(c[k]===v)}>${v}</button>`).join("")}</div>
-   <label class="f" style="font-weight:400">我對這件事的感受強度：<b class="mono">${c[ik]}</b> / 5<input type="range" min="1" max="5" id="c2-${ik}" data-bind="c2.${ik}" data-num="1" value="${c[ik]}"></label></div>`;
+   <label class="f" style="font-weight:400"><span>我對這件事的感受強度：<b class="mono">${c[ik]}</b> / 5</span><input type="range" min="1" max="5" id="c2-${ik}" data-bind="c2.${ik}" data-num="1" value="${c[ik]}"></label></div>`;
   return `<div class="stack"><span class="eyebrow">情境判斷</span><h3>「我的土地我作主」，可以嗎？鄰居可以反對嗎？</h3>
   <div class="grid2">${sc("s1","情境一：騎樓","騎樓是房屋所有人的土地，卻要讓行人通行，不能隨意堆放東西或封起來。","i1")}${sc("s2","情境二：出租給光電","林伯把自己的農地租給光電業者，鄰居擔心光電板反光、改變排水。","i2")}</div>
   ${c.s1&&c.s2?`<div class="law"><span class="mono">民法 第 765 條</span>所有人，於法令限制之範圍內，得自由使用、收益、處分其所有物，並排除他人之干涉。</div>
@@ -631,7 +644,9 @@ function ch2(st){
  }
  return `<div class="stack"><span class="eyebrow">組間交叉提問 · 出口卡</span><h3>追問、反思，再看看德國的例子</h3>
   <label class="f">針對你判斷為「有爭議」的一項，向對方小組提出一個追問<small>例如：如果夜間噪音超標，誰負責監測、多久內要改善？</small><textarea id="c2-ask" data-bind="c2.ask">${esc(c.ask)}</textarea></label>
-  <label class="f">出口卡：為什麼「程序」會影響人們的情緒？<textarea id="c2-exit" data-bind="c2.exit">${esc(c.exit)}</textarea></label>
+  <div class="case"><b>回到情境二：林伯把農地租給光電業者</b><p class="muted" style="font-size:14px">學了比例原則與正當程序之後，再標一次你的感受強度。第一次標的是 ${c.i2} / 5。</p>
+  <label class="f" style="font-weight:400"><span>現在的感受強度：<b class="mono">${c.i2b}</b> / 5</span><input type="range" min="1" max="5" id="c2-i2b" data-bind="c2.i2b" data-num="1" value="${c.i2b}"></label></div>
+  <label class="f">出口卡：為什麼「程序」會影響人們的情緒？<small>提示：覺得被聽見、被說明理由時，即使結果不變，憤怒也可能降低。這就是「認知改變情緒」。</small><textarea id="c2-exit" data-bind="c2.exit">${esc(c.exit)}</textarea></label>
   <div class="case"><span class="tag s">國際對照</span><h3>德國呂策拉特村（Lützerath）</h3><p>為了擴大露天褐煤礦，村民自 2006 年起陸續遷離。政府與能源公司協議把當地燃煤退場提前到 2030 年，並保留其他村莊，但呂策拉特仍在 2023 年初被清空拆除。化石能源和綠能一樣，都需要土地。</p></div>
   <div class="grid2"><label class="f">和台灣綠能案例的一個相同點<textarea id="c2-same" data-bind="c2.same">${esc(c.same)}</textarea></label><label class="f">一個不同點<textarea id="c2-diff" data-bind="c2.diff">${esc(c.diff)}</textarea></label></div></div>`;
 }
@@ -686,7 +701,7 @@ function ch3(st){
   if(st===0)return `<div class="stack"><span class="eyebrow">情緒快照 · 2 分鐘</span><h3>快速滑過這些貼文，記下第一眼的感受</h3><p class="muted">這些貼文和帳號都是為了課堂自製的，沒有使用真實個資。</p>
    <div class="grid2" style="align-items:start"><div class="feed">${feed}</div><div class="stack" style="position:sticky;top:12px">
    <p class="q">看完的第一個情緒是？（最多 3 個）</p><div class="row" style="gap:6px">${[...EMO_NEG.slice(0,8),"好奇","懷疑","平靜"].map(w=>`<button class="chip" data-act="snap" data-w="${w}" ${pressed(c.snapEmo.includes(w))}>${w}</button>`).join("")}</div>
-   <label class="f" style="font-weight:400">情緒強度：<b class="mono">${c.snapInt}</b> / 5<input type="range" min="1" max="5" id="c3-int" data-bind="c3.snapInt" data-num="1" value="${c.snapInt}"></label>
+   <label class="f" style="font-weight:400"><span>情緒強度：<b class="mono">${c.snapInt}</b> / 5</span><input type="range" min="1" max="5" id="c3-int" data-bind="c3.snapInt" data-num="1" value="${c.snapInt}"></label>
    <div class="note">關鍵提問：這則貼文想讓你有什麼感覺？</div></div></div></div>`;
   const n=Object.keys(c.lab).length,score=POSTS.filter(p=>c.lab[p.id]===p.ans).length;
   return `<div class="stack"><span class="eyebrow">辨識操弄 · 貼文檢核表</span><h3>這則貼文是哪一種？</h3>
@@ -714,7 +729,8 @@ function ch3(st){
   return `<div class="stack"><span class="eyebrow">停一下再回應 · 四步驟</span><h3>你在留言區看到這則留言</h3>
   <article class="post"><div class="who"><span class="avatar">碳</span><b>${ATTACK.user}</b><span class="sim">模擬留言</span></div><div class="body">${ATTACK.text}</div></article>
   <div class="case"><b>① 暫停</b><p class="muted" style="font-size:14px">先不要回。手離開鍵盤，吸氣四秒、吐氣四秒。</p></div>
-  <div class="case"><b>② 命名情緒</b><div class="row" style="gap:6px">${["生氣","煩躁","委屈","害怕","無力","想反擊","同情","平靜"].map(w=>`<button class="chip" data-act="arr" data-k="c3.emo" data-w="${w}" ${pressed(c.emo.includes(w))}>${w}</button>`).join("")}</div></div>
+  <div class="case"><b>② 命名情緒</b><div class="row" style="gap:6px">${["生氣","煩躁","委屈","害怕","無力","想反擊","同情","平靜"].map(w=>`<button class="chip" data-act="arr" data-k="c3.emo" data-w="${w}" ${pressed(c.emo.includes(w))}>${w}</button>`).join("")}</div>
+   <label class="f" style="font-weight:400">這個情緒讓我比較想相信什麼？<small>例如：我很生氣，所以比較想相信「反對的人都是被煽動的」。</small><input type="text" id="c3-lean" data-bind="c3.lean" value="${esc(c.lean)}"></label></div>
   <div class="case"><b>③ 查證：回應前，我要先確認</b>${VERIFY.map((v,i)=>`<label class="check"><input type="checkbox" data-act="arrcb" data-k="c3.ver" data-w="${i}" ${c.ver.includes(String(i))?"checked":""}><span>${v}</span></label>`).join("")}</div>
   <div class="case"><b>④ 再決定</b><div class="seg lbl" style="flex-wrap:wrap">${["寫一則不升高衝突的回應","先不回應，改用自保方法"].map(v=>`<button data-act="set" data-k="c3.action" data-v="${v}" ${pressed(c.action===v)}>${v}</button>`).join("")}</div>
   ${c.action==="寫一則不升高衝突的回應"?`<label class="f" style="font-weight:400">你的回應<small>提示：不攻擊人、說出事實或問題、留空間給不同意見。</small><textarea id="c3-reply" data-bind="c3.reply">${esc(c.reply)}</textarea></label>
@@ -759,7 +775,8 @@ function ch4(st){
   <details><summary class="muted" style="cursor:pointer">公聽會發言評分規準</summary><div class="tablewrap"><table class="matrix"><tr><th></th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
   <tr><td>立場表達</td><td>清楚說明立場並引用比例原則或正當程序</td><td>立場清楚、理由合理</td><td>有立場但理由模糊</td><td>未表達立場</td></tr>
   <tr><td>情緒表達</td><td>以我訊息完整說出感受、原因與需求</td><td>能說出感受與需求</td><td>以指責方式表達</td><td>未表達</td></tr>
-  <tr><td>同理回應</td><td>能複述並具體回應他人擔憂</td><td>能回應他人觀點</td><td>僅重申己見</td><td>打斷或忽略他人</td></tr></table></div></details></div>`;
+  <tr><td>同理回應</td><td>能複述並具體回應他人擔憂</td><td>能回應他人觀點</td><td>僅重申己見</td><td>打斷或忽略他人</td></tr>
+  <tr><td>後設覺察</td><td>能說明情緒如何影響自己的立場或判斷，並區分被感動與被說服</td><td>能說出情緒影響了自己的立場</td><td>能說出情緒，但未連結到立場</td><td>未覺察</td></tr></table></div><p class="muted" style="font-size:13px">每輪發言評前三項；「後設覺察」在本關最後的「出戲」評。</p></details></div>`;
  }
  if(st===2){
   const w=c.walk;
@@ -767,15 +784,25 @@ function ch4(st){
   <p class="walker">左排：支持設置　右排：反對或保留　已走 ${w} / ${CONSCIENCE.length} 步</p>
   <div class="lane">${CONSCIENCE.map((v,i)=>`<div class="v ${v.s} ${i<w?"heard":""}">${i<w?v.t:"……"}</div>`).join("")}</div>
   ${w<CONSCIENCE.length?`<button class="primary" data-act="walk">往前走一步</button>`:`
-  <p class="q">走到巷子盡頭，你的決定是？</p>
+  <p class="q">走到巷子盡頭，你「當下」的決定是？（熱決定）</p>
   <div class="stack" style="gap:6px">${DECISIONS.map(d=>`<button class="role" data-act="set" data-k="c4.decision" data-v="${d}" ${pressed(c.decision===d)}>${d}</button>`).join("")}</div>
-  ${c.decision?`<label class="f">做完決定，你的內心感受是？<textarea id="c4-mf" data-bind="c4.mayorFeel">${esc(c.mayorFeel)}</textarea></label>
+  ${c.decision?`<div class="case"><b>暫停一分鐘</b><p class="muted" style="font-size:14px">深呼吸，回想第二關的公益衡量判斷表：目的正當、手段適當、最小侵害、利益衡平；資訊公開、民眾參與、說明理由。</p></div>
+  <p class="q">冷靜之後，你的決定是？（冷決定）</p>
+  <div class="stack" style="gap:6px">${DECISIONS.map(d=>`<button class="role" data-act="set" data-k="c4.cold" data-v="${d}" ${pressed(c.cold===d)}>${d}</button>`).join("")}</div>`:""}
+  ${c.decision&&c.cold?`<div class="note ${c.decision===c.cold?"pond":""}">${c.decision===c.cold?"兩次決定一樣。這代表當下推動你的情緒，可能本身就有道理。":"兩次決定不同。想一想：當下推動你的，是自己真正在乎的事，還是巷子裡被渲染的情緒？"}</div>
+  <label class="f">巷子裡最打動你的是哪一句？<select id="c4-touch" data-act="touchsel"><option value="">選一句</option>${CONSCIENCE.map(v=>`<option ${c.touch===v.t?"selected":""}>${v.t}</option>`).join("")}</select></label>
+  <p class="q">那句話改變的是？</p>
+  <div class="seg lbl" style="flex-wrap:wrap">${["我的感受（被感動）","我對事實或理由的判斷（被說服）","都沒有改變"].map(v=>`<button data-act="set" data-k="c4.moved" data-v="${v}" ${pressed(c.moved===v)}>${v}</button>`).join("")}</div>
+  <label class="f">做完決定，你的內心感受是？<textarea id="c4-mf" data-bind="c4.mayorFeel">${esc(c.mayorFeel)}</textarea></label>
   <label class="f">這個決定，誰會最難過？你可以怎麼回應他？<textarea id="c4-hurt" data-bind="c4.hurt">${esc(c.hurt)}</textarea></label>`:""}`}</div>`;
  }
  return `<div class="stack"><span class="eyebrow">出戲</span><h3>脫下名牌</h3>
   <p>你剛才扮演的是<b>${esc(roleById(c.role)?.who||"一位居民")}</b>，也當了一次縣長。現在把角色放下。</p>
   <label class="f">剛才哪一刻最有感覺？<textarea id="c4-moment" data-bind="c4.moment">${esc(c.moment)}</textarea></label>
   <label class="f">那個感覺，是角色的情緒，還是你自己的情緒？<small>例如：生氣是角色的，但聽到漁民說沒被通知時的難過，是我自己的。</small><textarea id="c4-split" data-bind="c4.split">${esc(c.split)}</textarea></label>
+  <label class="f">後設覺察：今天的情緒，怎麼影響了你的立場或判斷？<small>試著說出：哪個情緒、影響了哪一欄（感受／相信／主張），你是被感動還是被說服。</small><textarea id="c4-meta" data-bind="c4.meta">${esc(c.meta)}</textarea></label>
+  <div class="row"><button data-act="metafb" ${c.meta.trim().length<10?"disabled":""}>${claudeState==="on"?"請 Claude 依規準評後設覺察":"依規準檢核後設覺察"}</button><span id="meta-status" class="thinking"></span></div>
+  ${c.metaFb?`<div class="fb ${c.metaFb.score>=3?"good":"warn"}"><b>後設覺察 ${c.metaFb.score} / 4。</b>${esc(c.metaFb.text)}</div>`:""}
   <div class="stack" style="align-items:center"><div class="breath" id="breath">出戲</div><button data-act="breathe">深呼吸三次</button></div></div>`;
 }
 
@@ -814,14 +841,18 @@ function ch5(st){
   <p class="q">誰參與？</p>${multi("who",STAKE)}
   <p class="q">何時參與？</p>${multi("when",STAGES)}
   <p class="q">用什麼方式參與？</p>${multi("how",METHODS)}
+  <p class="q">放入哪些「情緒調節機制」，讓決策不被一時的情緒渲染主導？（至少一項）</p>${multi("reg",REGS)}
   <label class="f">如何讓弱勢居民與生態被考量？<small>例如：承租漁民、高齡居民、黑面琵鷺</small><textarea id="c5-inc" data-bind="c5.inclusion">${esc(c.inclusion)}</textarea></label>
   <label class="f">決策如何回應意見？<small>例如：逐條回覆、說明採納或不採納的理由、公開紀錄</small><textarea id="c5-resp" data-bind="c5.respond">${esc(c.respond)}</textarea></label>
   <div class="row"><button class="primary" data-act="procfb">${claudeState==="on"?"請 Claude 依評分規準檢視":"依評分規準檢核"}</button><span id="proc-status" class="thinking"></span></div>
   ${fb?`<div class="tablewrap"><table class="matrix"><thead><tr><th>參與流程評分規準</th><th>評等</th><th>回饋</th></tr></thead><tbody>${fb.items.map(x=>`<tr><td><b>${esc(x.k)}</b></td><td style="white-space:nowrap;color:${x.ok?"var(--good)":"var(--warn)"};font-weight:700">${x.ok?"優秀":"待加強"}</td><td>${esc(x.t)}</td></tr>`).join("")}</tbody></table></div>`:""}
-  <div class="note pond">關鍵提問：你的流程如何同時照顧減碳目標與在地居民？課堂上請把流程畫成海報，各組 1 分鐘發表。</div></div>`;
+  <div class="note pond">關鍵提問：你的流程如何避免決策被一時的情緒渲染主導，又不忽略居民真實的擔憂？課堂上請把流程畫成海報，各組 1 分鐘發表。</div></div>`;
  }
- const postDone=S.post.every(x=>x>0);
- return `<div class="stack"><span class="eyebrow">SEL 後測 · 反思</span><h3>回到出發時的 8 個問題</h3>${selForm("post")}${postDone?certificate():`<p class="muted">完成 8 題後測，就會看到你的成果卡。</p>`}</div>`;
+ const postDone=S.post.every(x=>x>0);const c1=S.c1;
+ const traj=`<div class="case"><b>我的變化軌跡</b><p class="muted" style="font-size:14px">第一關的你：感到「${esc(c1.feel||"–")}」（強度 ${c1.feelInt}）；相信「${esc(c1.believe||"–")}」；主張「${esc(c1.stance||"–")}」。</p>
+  <p class="q">走完五個地號，我的立場：</p><div class="seg lbl">${["有改變","沒有改變"].map(v=>`<button data-act="set" data-k="c5.traj" data-v="${v}" ${pressed(c.traj===v)}>${v}</button>`).join("")}</div>
+  ${c.traj?`<p class="q">主要因為：</p><div class="seg lbl" style="flex-wrap:wrap">${SOURCES.map(v=>`<button data-act="set" data-k="c5.trajSrc" data-v="${v}" ${pressed(c.trajSrc===v)}>${v}</button>`).join("")}</div>`:""}</div>`;
+ return `<div class="stack">${traj}<span class="eyebrow">SEL 後測 · 反思</span><h3>回到出發時的 ${SEL.length} 個問題</h3>${selForm("post")}${postDone?certificate():`<p class="muted">完成 ${SEL.length} 題後測，就會看到你的成果卡。</p>`}</div>`;
 }
 
 /* ---------- RESULTS ---------- */
@@ -831,18 +862,20 @@ function summary(){
  const lab=POSTS.filter(p=>c3.lab[p.id]===p.ans).length;
  const a=k=>c4.scores.length?+(c4.scores.reduce((s,x)=>s+x[k],0)/c4.scores.length).toFixed(1):0;
  const proc=c5.procFb?c5.procFb.items.filter(x=>x.ok).length:0;
- return {bal,lab,stance:a("stance"),emotion:a("emotion"),empathy:a("empathy"),proc,pre:+avg(S.pre).toFixed(2),post:+avg(S.post).toFixed(2)};
+ return {bal,lab,stance:a("stance"),emotion:a("emotion"),empathy:a("empathy"),meta:c4.metaFb?c4.metaFb.score:0,proc,pre:+avg(S.pre).toFixed(2),post:+avg(S.post).toFixed(2)};
 }
 function recordText(){
  const s=summary(),c1=S.c1,c4=S.c4,c5=S.c5;
  return [`學生：${S.name||"（未填）"}　座號：${S.seat||"–"}`,
  `第一關 投票：${SCALE[c1.v1]||"–"} → ${SCALE[c1.v2]||"–"}；情緒：${c1.e1.join("、")||"–"} → ${c1.e2.join("、")||"–"}`,
- `第一關 我的立場：${c1.stance||"–"}`,
+ `第一關 三欄：我感到 ${c1.feel||"–"}（強度 ${c1.feelInt}）／我相信 ${c1.believe||"–"}／我主張 ${c1.stance||"–"}；影響最多：${c1.src||"–"}`,
+ `第二關 情境二感受強度：${S.c2.i2} → ${S.c2.i2b}`,
  `第二關 公益衡量判斷表與參考判斷一致：${s.bal} / 7`,
- `第三關 貼文辨識正確：${s.lab} / 6；自保策略：${S.c3.strategy||"–"}`,
+ `第三關 貼文辨識正確：${s.lab} / 6；情緒讓我想相信：${S.c3.lean||"–"}；自保策略：${S.c3.strategy||"–"}`,
  `第四關 角色：${roleById(c4.role)?.who||"–"}；發言平均 立場 ${s.stance}／情緒 ${s.emotion}／同理 ${s.empathy}`,
- `第四關 縣長決定：${c4.decision||"–"}`,
- `第五關 換位角色：${roleById(c5.swapRole)?.who||"–"}；參與流程優秀項目：${s.proc} / 4`,
+ `第四關 縣長決定：熱 ${c4.decision||"–"} → 冷 ${c4.cold||"–"}；最打動的一句改變了：${c4.moved||"–"}；後設覺察 ${s.meta||"–"} / 4`,
+ `第五關 換位角色：${roleById(c5.swapRole)?.who||"–"}；參與流程優秀項目：${s.proc} / 5；調節機制：${c5.reg.join("、")||"–"}`,
+ `第五關 變化軌跡：立場${c5.traj||"–"}，主要因為${c5.trajSrc||"–"}`,
  `SEL 前測平均 ${s.pre}　後測平均 ${s.post}　變化 ${(s.post-s.pre>=0?"+":"")+(s.post-s.pre).toFixed(2)}`,
  `反思：${S.c4.moment||"–"}`].join("\n");
 }
@@ -850,7 +883,7 @@ function certificate(){
  const s=summary();
  const bars=SEL.map(([g,t],i)=>`<span style="font-size:13px">${i+1}. ${t}</span><div class="stack" style="gap:3px"><div class="bar"><i style="width:${S.pre[i]*20}%"></i></div><div class="bar b"><i style="width:${S.post[i]*20}%"></i></div></div><span class="mono" style="font-size:12px">${S.pre[i]}→${S.post[i]}</span>`).join("");
  return `<div class="cert"><div class="row" style="justify-content:space-between"><div><span class="eyebrow">鹽風里公聽會 · 成果卡</span><h3 style="font-size:24px;margin-top:4px">${esc(S.name||"公民")} 的鹽風里紀錄</h3></div><div class="stamp" style="position:static">完成<br>5 地號</div></div>
- <div class="kv"><div><small>公益衡量判斷</small><b>${s.bal}/7</b></div><div><small>謠言辨識</small><b>${s.lab}/6</b></div><div><small>公聽會 同理回應</small><b>${s.empathy||"–"}/4</b></div><div><small>參與流程 優秀項目</small><b>${s.proc}/4</b></div><div><small>SEL 平均 前→後</small><b>${s.pre}→${s.post}</b></div></div>
+ <div class="kv"><div><small>公益衡量判斷</small><b>${s.bal}/7</b></div><div><small>謠言辨識</small><b>${s.lab}/6</b></div><div><small>公聽會 同理回應</small><b>${s.empathy||"–"}/4</b></div><div><small>後設覺察</small><b>${s.meta||"–"}/4</b></div><div><small>參與流程 優秀項目</small><b>${s.proc}/5</b></div><div><small>SEL 平均 前→後</small><b>${s.pre}→${s.post}</b></div></div>
  <div class="legend"><span><i style="background:var(--solar)"></i>前測</span><span><i style="background:var(--pond)"></i>後測</span></div>
  <div class="compare">${bars}</div>
  <p class="q">交給老師的學習紀錄</p><p class="muted" style="font-size:14px">按下複製後，貼到老師指定的表單或傳給老師。紀錄只存在這台裝置的瀏覽器裡。</p>
@@ -917,6 +950,25 @@ feedback：一句具體、溫和、對高中生說的回饋（45 字內）。exa
  const me=c.log[c.log.length-1];me.sc=sc;me.fb=fb;me.ex=ex;c.scores.push(sc);
  if(next.text)c.log.push(next);save();render();
 }
+async function metaFb(){
+ const c=S.c4,txt=c.meta.trim();const st=$("#meta-status");
+ const local=()=>{const emo=/(擔心|害怕|生氣|難過|焦慮|矛盾|不安|委屈|失望|同情|感動|無力|煩躁|心疼|感受|情緒)/.test(txt);
+  const link=/(立場|主張|判斷|相信|決定|想法)/.test(txt);const dist=/(感動|說服)/.test(txt);
+  const score=emo&&link&&dist?4:emo&&link?3:emo?2:1;
+  const t=["還沒看到你的情緒。先寫出今天出現的一個情緒。","你說出了情緒，接著寫它影響了你的哪一個立場或判斷。","你看見情緒影響了立場。再分辨一下：你是被感動，還是被說服？","你能說明情緒如何影響判斷，也分得出被感動與被說服。"][score-1];
+  return {score,text:t}};
+ if(sample&&claudeState==="on"){st.textContent="Claude 正在閱讀……";
+  try{const x=await sample.json(`${SETTING}
+學生在公聽會扮演「${roleById(c.role)?.who||"某角色"}」，在良心巷當縣長時，熱決定是「${c.decision||"未選"}」、冷靜後的決定是「${c.cold||"未選"}」，認為最打動自己的那句話改變的是「${c.moved||"未選"}」。
+學生的後設覺察反思：「${txt}」
+請依規準評「後設覺察」（1–4 的整數）：4=能說明情緒如何影響自己的立場或判斷，並區分被感動與被說服；3=能說出情緒影響了自己的立場；2=能說出情緒，但未連結到立場；1=未覺察。
+本課程不把情緒當成理性的干擾，回饋不可暗示情緒是錯的。
+只回覆 JSON：{"score":3,"text":"給高中生的具體回饋，先肯定再建議，60 字內"}`);
+   c.metaFb={score:Math.max(1,Math.min(4,Math.round(+x.score)||1)),text:String(x.text||"")};}
+  catch(e){toast(claudeFail(e));c.metaFb=local()}}
+ else c.metaFb=local();
+ save();render();
+}
 async function replyFb(){
  const c=S.c3,txt=c.reply.trim();const st=$("#reply-status");
  const local=()=>{const bad=/(自私|白痴|笨|滾|閉嘴|你才|斷你|去死)/.test(txt);const q=/[？?]/.test(txt)||/(資料|查證|來源|監測|報告|事實)/.test(txt);const em=/(理解|我聽到|擔心|可能|也許|一起)/.test(txt);
@@ -948,7 +1000,7 @@ async function swapFb(){
 }
 async function procFb(){
  const c=S.c5;const st=$("#proc-status");
- const desc=`誰參與：${c.who.join("、")||"未選"}\n何時參與：${c.when.join("、")||"未選"}\n參與方式：${c.how.join("、")||"未選"}\n如何讓弱勢與生態被考量：${c.inclusion||"未填"}\n決策如何回應意見：${c.respond||"未填"}`;
+ const desc=`誰參與：${c.who.join("、")||"未選"}\n何時參與：${c.when.join("、")||"未選"}\n參與方式：${c.how.join("、")||"未選"}\n情緒調節機制：${c.reg.join("、")||"未選"}\n如何讓弱勢與生態被考量：${c.inclusion||"未填"}\n決策如何回應意見：${c.respond||"未填"}`;
  const local=()=>{const inc=/(漁民|承租|弱勢|高齡|生態|琵鷺|棲地|翻譯|到府|交通)/.test(c.inclusion)&&c.inclusion.length>=10;
   const feas=c.when.length>=2&&c.how.length>=2&&c.respond.length>=8;
   const emp=c.who.length>=4;
@@ -956,7 +1008,8 @@ async function procFb(){
   return {items:[{k:"包容性",ok:inc,t:inc?"有具體機制讓弱勢居民或生態被考量。":"寫出一項具體做法，例如逐戶通知承租漁民、生態調查先於選址。"},
    {k:"可行性",ok:feas,t:feas?"步驟有標出階段、方式與回應方法。":"至少選兩個參與階段、兩種方式，並寫清楚怎麼回應意見。"},
    {k:"同理展現",ok:emp,t:emp?"納入多方利害關係人。":"再多納入幾個受影響的群體，例如承租漁民、保育團體。"},
-   {k:"法治連結",ok:law,t:law?"有運用正當程序或比例原則的概念。":"試著寫出你的流程如何做到資訊公開、民眾參與或說明理由。"}]}};
+   {k:"法治連結",ok:law,t:law?"有運用正當程序或比例原則的概念。":"試著寫出你的流程如何做到資訊公開、民眾參與或說明理由。"},
+   {k:"調節機制",ok:c.reg.length>=1,t:c.reg.length?"有放入讓決策不被當下情緒主導的設計："+c.reg.join("、")+"。":"至少放入一項，例如公告期與冷靜期、結構化發言順序。"}]}};
  if(sample&&claudeState==="on"){st.textContent="Claude 正在檢視流程……";
   try{const x=await sample.json(`${SETTING}
 一組學生為鹽風里設計了綠能選址參與流程：
@@ -967,9 +1020,10 @@ ${desc}
 2. 可行性：步驟具體，標明參與者、時間與方式。
 3. 同理展現：呈現多方利害關係人的需求。
 4. 法治連結：正確運用比例原則或正當程序。
+5. 調節機制：至少一項讓決策不被當下情緒渲染主導、又能回應居民真實擔憂的設計。
 每項給一句具體回饋（45 字內，對高中生說話，待加強時給可行的修改建議）。
-只回覆 JSON：{"items":[{"k":"包容性","ok":true,"t":"…"},{"k":"可行性","ok":false,"t":"…"},{"k":"同理展現","ok":true,"t":"…"},{"k":"法治連結","ok":true,"t":"…"}]}`);
-   if(Array.isArray(x.items)&&x.items.length)c.procFb={items:x.items.slice(0,4).map(i=>({k:String(i.k),ok:!!i.ok,t:String(i.t||"")}))};else c.procFb=local();}
+只回覆 JSON：{"items":[{"k":"包容性","ok":true,"t":"…"},{"k":"可行性","ok":false,"t":"…"},{"k":"同理展現","ok":true,"t":"…"},{"k":"法治連結","ok":true,"t":"…"},{"k":"調節機制","ok":true,"t":"…"}]}`);
+   if(Array.isArray(x.items)&&x.items.length)c.procFb={items:x.items.slice(0,5).map(i=>({k:String(i.k),ok:!!i.ok,t:String(i.t||"")}))};else c.procFb=local();}
   catch(e){toast(claudeFail(e));c.procFb=local()}}
  else c.procFb=local();
  save();render();
@@ -983,11 +1037,12 @@ document.addEventListener("input",e=>{
  setPath(p,el.dataset.num?+el.value:el.value);save();
  if(el.type==="range"){const b=el.parentElement.querySelector("b");if(b)b.textContent=el.value}
  if(p==="name"||p==="seat"){const h=document.querySelector(".top");if(h)h.outerHTML=header()}
- if(["c3.reply","c5.swap"].includes(p)){const btn=el.closest(".stack").querySelector('[data-act="replyfb"],[data-act="swapfb"]');if(btn)btn.disabled=el.value.trim().length<(p==="c3.reply"?8:10)}
+ if(["c3.reply","c5.swap","c4.meta"].includes(p)){const btn=el.closest(".stack").querySelector('[data-act="replyfb"],[data-act="swapfb"],[data-act="metafb"]');if(btn)btn.disabled=el.value.trim().length<(p==="c3.reply"?8:10)}
 });
 document.addEventListener("change",e=>{
  const el=e.target,a=el.dataset.act;
  if(a==="match"){S.c1.match[el.dataset.k]=el.value;save();render()}
+ if(a==="touchsel"){S.c4.touch=el.value;save()}
  if(a==="rep"){const i=+el.dataset.i;const arr=S.c3.rep;const k=arr.indexOf(i);if(k>=0)arr.splice(k,1);else arr.push(i);save();render()}
  if(a==="arrcb"){const arr=getPath(el.dataset.k);const w=el.dataset.w;const k=arr.indexOf(w);if(k>=0)arr.splice(k,1);else arr.push(w);save();render()}
 });
@@ -1026,6 +1081,7 @@ document.addEventListener("click",async e=>{
   case "replyfb":el.disabled=true;await replyFb();break;
   case "swapfb":el.disabled=true;await swapFb();break;
   case "procfb":el.disabled=true;await procFb();break;
+  case "metafb":el.disabled=true;await metaFb();break;
   case "breathe":{const b=$("#breath");if(!b)break;el.disabled=true;let n=0;const tick=()=>{if(!b.isConnected)return;if(n>=6){b.textContent="出戲了";b.classList.remove("in");el.disabled=false;return}const inh=n%2===0;b.classList.toggle("in",inh);b.textContent=inh?"吸氣":"吐氣";n++;setTimeout(tick,4000)};tick();break}
   case "copy":{const t=recordText();try{await navigator.clipboard.writeText(t);toast("已複製學習紀錄")}catch(_){const r=document.createRange();r.selectNodeContents($("#record"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("已選取文字，請按複製")}break}
  }
