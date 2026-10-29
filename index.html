@@ -856,6 +856,7 @@ function ch5(st){
   const fb=c.procFb;
   const multi=(k,list)=>`<div class="row" style="gap:6px">${list.map(w=>`<button class="chip" data-act="arr" data-k="c5.${k}" data-w="${w}" ${pressed(c[k].includes(w))}>${w}</button>`).join("")}</div>`;
   return `<div class="stack"><span class="eyebrow">小組任務 · 流程模板</span><h3>為鹽風里設計一套更好的綠能選址參與流程</h3>
+  <div class="note pond">遷移任務：課堂上看完《我們的島》第 1327 集的南迴風機段落後，請把這套流程套用到那個正在發生的真實爭議；沒有看影片時，就以鹽風里來設計。</div>
   <p class="q">誰參與？</p>${multi("who",STAKE)}
   <p class="q">何時參與？</p>${multi("when",STAGES)}
   <p class="q">用什麼方式參與？</p>${multi("how",METHODS)}
